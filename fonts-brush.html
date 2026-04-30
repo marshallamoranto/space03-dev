@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>space03 — Brush & Textured Fonts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Caveat:wght@700&family=Kalam:wght@700&family=Permanent+Marker&family=Dancing+Script:wght@700&family=Satisfy&family=Yellowtail&family=Sacramento&family=Lobster&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --grad: linear-gradient(135deg, #FF9A3C 0%, #FF4E8A 55%, #7B2FBE 100%);
+    }
+
+    body {
+      background: #0D0D0D;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      padding: 40px 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    header h1 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 12px;
+    }
+    .grad-bar {
+      height: 3px;
+      background: var(--grad);
+      border-radius: 999px;
+      width: 60px;
+      margin: 0 auto;
+    }
+
+    .note {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    .note strong { color: #888; }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #222;
+    }
+
+    .font-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .font-card {
+      background: #1a1a1a;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #2a2a2a;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .font-card:hover { border-color: #FF4E8A; transform: translateY(-3px); }
+
+    .card-top {
+      padding: 28px 28px 20px;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .font-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 14px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .font-demo-h {
+      line-height: 1.1;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-bottom {
+      border-top: 1px solid #222;
+      padding: 14px 28px;
+    }
+
+    .font-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #444;
+      background: rgba(255,255,255,0.04);
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-right: 6px;
+      margin-bottom: 4px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .font-desc {
+      font-size: 12px;
+      color: #444;
+      line-height: 1.6;
+      margin-top: 10px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ---- FONT SIZES ---- */
+    .f-pacifico   { font-family: 'Pacifico', cursive; font-size: clamp(1.8rem, 4vw, 2.4rem); }
+    .f-caveat     { font-family: 'Caveat', cursive; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; }
+    .f-kalam      { font-family: 'Kalam', cursive; font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; }
+    .f-marker     { font-family: 'Permanent Marker', cursive; font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+    .f-dancing    { font-family: 'Dancing Script', cursive; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; }
+    .f-satisfy    { font-family: 'Satisfy', cursive; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    .f-yellowtail { font-family: 'Yellowtail', cursive; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    .f-sacramento { font-family: 'Sacramento', cursive; font-size: clamp(2.2rem, 5vw, 3.4rem); }
+    .f-lobster    { font-family: 'Lobster', cursive; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>space03 · Brush & Textured Fonts · Warm Sunset</h1>
+    <div class="grad-bar"></div>
+  </header>
+
+  <div class="note">
+    <strong>Note:</strong> Brush fonts work best as an accent — paired with a clean sans-serif for body text. Think: brush font for your name or a hero tagline, clean font for everything else. Great for adding warmth and a handcrafted feel.
+  </div>
+
+  <p class="section-title">Brush & Script Options</p>
+
+  <div class="font-grid">
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">B01 — Pacifico</div>
+        <div class="font-demo-h f-pacifico">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Brush</span><span class="font-tag">Rounded</span><span class="font-tag">Friendly</span>
+        <div class="font-desc">Smooth, rounded brush strokes. Warm and approachable — popular in creative branding.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">B02 — Caveat</div>
+        <div class="font-demo-h f-caveat">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Handwritten</span><span class="font-tag">Casual</span><span class="font-tag">Personal</span>
+        <div class="font-desc">Natural handwriting feel — like a designer's sketchbook. Personal and authentic.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">B03 — Kalam</div>
+        <div class="font-demo-h f-kalam">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Handwritten</span><span class="font-tag">Ink</span><span class="font-tag">Organic</span>
+        <div class="font-desc">Ink pen handwriting with natural texture. Feels genuine and human, not too casual.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">B04 — Permanent Marker</div>
+        <div class="font-demo-h f-marker">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Marker</span><span class="font-tag">Bold</span><span class="font-tag">Raw</span>
+        <div class="font-desc">Thick marker strokes — raw, bold, unapologetic. Great for a more edgy creative identity.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">B05 — Dancing Script</div>
+        <div class="font-demo-h f-dancing">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Script</span><span class="font-tag">Elegant</span><span class="font-tag">Flowing</span>
+        <div class="font-desc">Flowing calligraphic script. Elegant and polished — feels refined without being stiff.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">B06 — Satisfy</div>
+        <div class="font-demo-h f-satisfy">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Script</span><span class="font-tag">Smooth</span><span class="font-tag">Stylish</span>
+        <div class="font-desc">Smooth, stylish brush script. Clean strokes with personality — professional yet playful.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">B07 — Yellowtail</div>
+        <div class="font-demo-h f-yellowtail">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Retro</span><span class="font-tag">Script</span><span class="font-tag">Fun</span>
+        <div class="font-desc">Retro brush script with a vintage signage feel. Fun, confident, and very distinctive.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">B08 — Sacramento</div>
+        <div class="font-demo-h f-sacramento">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Thin Script</span><span class="font-tag">Delicate</span><span class="font-tag">Luxury</span>
+        <div class="font-desc">Ultra thin calligraphy script. Very delicate and high-end — best for name/logo use only.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">B09 — Lobster</div>
+        <div class="font-demo-h f-lobster">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Script</span><span class="font-tag">Bold</span><span class="font-tag">Classic</span>
+        <div class="font-desc">Bold retro script with thick strokes and ligatures. Timeless, energetic, very readable.</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
