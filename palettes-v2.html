@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>space03 — Palette Explorer v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0D0D0D;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      padding: 40px 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    header h1 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 8px;
+    }
+    header p { font-size: 12px; color: #333; }
+
+    .section-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #333;
+      margin: 48px 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .palette-card {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid #222;
+      transition: transform 0.2s;
+    }
+    .palette-card:hover { transform: translateY(-4px); }
+
+    .palette-hero {
+      height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+    }
+
+    .palette-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      opacity: 0.6;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .palette-headline {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      line-height: 1.1;
+    }
+
+    .palette-footer {
+      background: #161616;
+      padding: 16px 20px;
+      border-top: 1px solid #222;
+    }
+
+    .swatches {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+
+    .sw {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+
+    .p-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #bbb;
+      margin-bottom: 4px;
+    }
+
+    .p-desc {
+      font-size: 11px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    /* dark text helper */
+    .dark-text .palette-num,
+    .dark-text .palette-headline { color: #1a1a1a; }
+    .dark-text .palette-num { opacity: 0.4; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>space03 · Palette Explorer v2 · Permanent Marker Font</h1>
+    <p>Fresh directions — no GG orange</p>
+  </header>
+
+  <!-- DEEP & MOODY -->
+  <p class="section-title">Deep & Moody</p>
+  <div class="palette-grid">
+
+    <div class="palette-card">
+      <div class="palette-hero" style="background:linear-gradient(135deg,#1B0036 0%,#6A0DAD 55%,#C77DFF 100%);">
+        <div class="palette-num">01 — Ultraviolet</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#1B0036;"></div>
+          <div class="sw" style="background:#6A0DAD;"></div>
+          <div class="sw" style="background:#C77DFF;"></div>
+          <div class="sw" style="background:#F0D9FF;"></div>
+        </div>
+        <div class="p-name">Deep Indigo → Violet → Lavender</div>
+        <div class="p-desc">Dark, electric, otherworldly. Strong creative identity — mysterious and bold.</div>
+      </div>
+    </div>
+
+    <div class="palette-card">
+      <div class="palette-hero" style="background:linear-gradient(135deg,#0D0D0D 0%,#1A1A2E 40%,#16213E 70%,#0F3460 100%);">
+        <div class="palette-num">02 — Midnight</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#0D0D0D;"></div>
+          <div class="sw" style="background:#1A1A2E;"></div>
+          <div class="sw" style="background:#0F3460;"></div>
+          <div class="sw" style="background:#E94560;"></div>
+        </div>
+        <div class="p-name">Near Black → Navy → Crimson accent</div>
+        <div class="p-desc">Deep night blues with a single red accent pop. Sleek, cinematic, dramatic.</div>
+      </div>
+    </div>
+
+    <div class="palette-card">
+      <div class="palette-hero" style="background:linear-gradient(135deg,#0A1628 0%,#1B4332 50%,#40916C 100%);">
+        <div class="palette-num">03 — Deep Forest</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#0A1628;"></div>
+          <div class="sw" style="background:#1B4332;"></div>
+          <div class="sw" style="background:#40916C;"></div>
+          <div class="sw" style="background:#95D5B2;"></div>
+        </div>
+        <div class="p-name">Deep Navy → Forest Green → Mint</div>
+        <div class="p-desc">Nature-meets-night. Earthy and grounded — connects to your environmentalist values.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WARM & EARTHY -->
+  <p class="section-title">Warm & Earthy</p>
+  <div class="palette-grid">
+
+    <div class="palette-card">
+      <div class="palette-hero dark-text" style="background:linear-gradient(135deg,#E9C46A 0%,#F4A261 50%,#E76F51 100%);">
+        <div class="palette-num">04 — Terra</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#E9C46A;"></div>
+          <div class="sw" style="background:#F4A261;"></div>
+          <div class="sw" style="background:#E76F51;"></div>
+          <div class="sw" style="background:#264653;"></div>
+        </div>
+        <div class="p-name">Sand → Peach → Terracotta + Teal</div>
+        <div class="p-desc">Warm desert tones with a cool teal contrast. Organic, human, grounded.</div>
+      </div>
+    </div>
+
+    <div class="palette-card">
+      <div class="palette-hero dark-text" style="background:linear-gradient(135deg,#D4A574 0%,#C17D3C 50%,#8B4513 100%);">
+        <div class="palette-num">05 — Adobe</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#D4A574;"></div>
+          <div class="sw" style="background:#C17D3C;"></div>
+          <div class="sw" style="background:#8B4513;"></div>
+          <div class="sw" style="background:#F5E6D3;"></div>
+        </div>
+        <div class="p-name">Tan → Warm Brown → Sienna</div>
+        <div class="p-desc">Rich clay and adobe tones. Earthy, warm, tactile — like handmade materials.</div>
+      </div>
+    </div>
+
+    <div class="palette-card">
+      <div class="palette-hero dark-text" style="background:linear-gradient(135deg,#A8C5A0 0%,#D4956A 55%,#C4622D 100%);">
+        <div class="palette-num">06 — Garden</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#A8C5A0;"></div>
+          <div class="sw" style="background:#D4956A;"></div>
+          <div class="sw" style="background:#C4622D;"></div>
+          <div class="sw" style="background:#2D4A2D;"></div>
+        </div>
+        <div class="p-name">Sage → Clay → Rust + Deep Green</div>
+        <div class="p-desc">Garden and nature inspired. Lush, organic, peaceful — very aligned with your values.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOLD & VIBRANT -->
+  <p class="section-title">Bold & Vibrant</p>
+  <div class="palette-grid">
+
+    <div class="palette-card">
+      <div class="palette-hero" style="background:linear-gradient(135deg,#FF006E 0%,#8338EC 55%,#3A86FF 100%);">
+        <div class="palette-num">07 — Electric</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#FF006E;"></div>
+          <div class="sw" style="background:#8338EC;"></div>
+          <div class="sw" style="background:#3A86FF;"></div>
+          <div class="sw" style="background:#FFBE0B;"></div>
+        </div>
+        <div class="p-name">Hot Pink → Purple → Electric Blue</div>
+        <div class="p-desc">Full-spectrum vibrant. Maximum energy and youth — unapologetically bold.</div>
+      </div>
+    </div>
+
+    <div class="palette-card">
+      <div class="palette-hero" style="background:linear-gradient(135deg,#00B4D8 0%,#0077B6 50%,#03045E 100%);">
+        <div class="palette-num">08 — Pacific</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#00B4D8;"></div>
+          <div class="sw" style="background:#0077B6;"></div>
+          <div class="sw" style="background:#03045E;"></div>
+          <div class="sw" style="background:#90E0EF;"></div>
+        </div>
+        <div class="p-name">Sky Blue → Ocean → Deep Navy</div>
+        <div class="p-desc">Pacific Ocean vibes — fresh, clean, confident. Great for a California designer.</div>
+      </div>
+    </div>
+
+    <div class="palette-card">
+      <div class="palette-hero" style="background:linear-gradient(135deg,#F72585 0%,#7209B7 50%,#3A0CA3 100%);">
+        <div class="palette-num">09 — Neon Dusk</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#F72585;"></div>
+          <div class="sw" style="background:#7209B7;"></div>
+          <div class="sw" style="background:#3A0CA3;"></div>
+          <div class="sw" style="background:#4CC9F0;"></div>
+        </div>
+        <div class="p-name">Hot Pink → Violet → Deep Blue</div>
+        <div class="p-desc">Neon sunset through smoke. Intense, artistic, very current in design circles.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SOFT & REFINED -->
+  <p class="section-title">Soft & Refined</p>
+  <div class="palette-grid">
+
+    <div class="palette-card">
+      <div class="palette-hero dark-text" style="background:linear-gradient(135deg,#FFE5EC 0%,#FFC2D1 50%,#FF85A1 100%);">
+        <div class="palette-num">10 — Rose Quartz</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#FFE5EC;"></div>
+          <div class="sw" style="background:#FFC2D1;"></div>
+          <div class="sw" style="background:#FF85A1;"></div>
+          <div class="sw" style="background:#6D2B3D;"></div>
+        </div>
+        <div class="p-name">Blush → Rose → Deep Berry</div>
+        <div class="p-desc">Soft, romantic, delicate. Bold enough with a dark accent — refined and modern.</div>
+      </div>
+    </div>
+
+    <div class="palette-card">
+      <div class="palette-hero dark-text" style="background:linear-gradient(135deg,#E8F4F8 0%,#B8D8E8 50%,#7FB3C8 100%);">
+        <div class="palette-num">11 — Coastal Mist</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#E8F4F8;"></div>
+          <div class="sw" style="background:#B8D8E8;"></div>
+          <div class="sw" style="background:#7FB3C8;"></div>
+          <div class="sw" style="background:#2C5F6F;"></div>
+        </div>
+        <div class="p-name">Ice → Sky → Steel Blue</div>
+        <div class="p-desc">Cool, calm, airy. Like morning fog over the water. Clean and sophisticated.</div>
+      </div>
+    </div>
+
+    <div class="palette-card">
+      <div class="palette-hero dark-text" style="background:linear-gradient(135deg,#F8F0FF 0%,#D4B8E0 50%,#9B72CF 100%);">
+        <div class="palette-num">12 — Lavender Field</div>
+        <div class="palette-headline">Marshall Amoranto</div>
+      </div>
+      <div class="palette-footer">
+        <div class="swatches">
+          <div class="sw" style="background:#F8F0FF;"></div>
+          <div class="sw" style="background:#D4B8E0;"></div>
+          <div class="sw" style="background:#9B72CF;"></div>
+          <div class="sw" style="background:#3D1A6E;"></div>
+        </div>
+        <div class="p-name">White Lavender → Lilac → Deep Purple</div>
+        <div class="p-desc">Soft and dreamy with depth. Feminine, creative, elegant — stands out without shouting.</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
