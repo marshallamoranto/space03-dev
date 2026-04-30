@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>space03 — Font & Palette Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,700&family=Fraunces:ital,wght@0,700;1,700&family=Syne:wght@700;800&family=Cabinet+Grotesk:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Clash Display via CDN -->
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@700&display=swap" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0f0f0f;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #666;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #222;
+    }
+
+    section { margin-bottom: 80px; }
+
+    /* ===== FONTS ===== */
+    .font-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .font-card {
+      background: #1a1a1a;
+      border-radius: 20px;
+      padding: 32px 28px;
+      border: 1px solid #2a2a2a;
+      transition: border-color 0.2s;
+    }
+    .font-card:hover { border-color: #555; }
+
+    .font-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 16px;
+    }
+
+    .font-demo-h {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      line-height: 1.05;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+    .font-demo-sub {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+    }
+
+    .f-clash     { font-family: 'Clash Display', sans-serif; }
+    .f-bebas     { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.03em; }
+    .f-playfair  { font-family: 'Playfair Display', serif; font-style: italic; }
+    .f-cabinet   { font-family: 'Cabinet Grotesk', sans-serif; }
+    .f-fraunces  { font-family: 'Fraunces', serif; font-style: italic; }
+    .f-syne      { font-family: 'Syne', sans-serif; font-weight: 800; }
+
+    /* ===== PALETTES ===== */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .palette-card {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #2a2a2a;
+    }
+
+    .palette-hero {
+      height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      position: relative;
+    }
+
+    .palette-name {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      opacity: 0.7;
+    }
+
+    .palette-headline {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      line-height: 1.1;
+    }
+
+    .palette-body {
+      background: #1a1a1a;
+      padding: 20px 24px;
+    }
+
+    .palette-swatches {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .palette-desc {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    /* PALETTE 1 — Warm Sunset */
+    .p1-hero {
+      background: linear-gradient(135deg, #FF9A3C 0%, #FF4E8A 55%, #7B2FBE 100%);
+      color: #fff;
+    }
+
+    /* PALETTE 2 — Ocean Depth */
+    .p2-hero {
+      background: linear-gradient(135deg, #0ABFBC 0%, #2D4AE7 55%, #0A0A1A 100%);
+      color: #fff;
+    }
+
+    /* PALETTE 3 — Earthy Organic */
+    .p3-hero {
+      background: linear-gradient(135deg, #8DB87A 0%, #D4785A 55%, #E8C98A 100%);
+      color: #1a1a1a;
+    }
+    .p3-hero .palette-name,
+    .p3-hero .palette-headline { color: #1a1a1a; }
+
+    /* PALETTE 4 — Neon Minimal */
+    .p4-hero {
+      background: #f5f5f5;
+      color: #0f0f0f;
+    }
+    .p4-hero .palette-name { color: #0f0f0f; opacity: 0.4; }
+    .p4-hero .palette-headline {
+      color: #0f0f0f;
+      background: linear-gradient(90deg, #00FF87, #FF2D78);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* PALETTE 5 — Mono + Pop */
+    .p5-hero {
+      background: #111;
+      color: #fff;
+      border-bottom: 1px solid #222;
+    }
+    .p5-hero .palette-headline {
+      color: #fff;
+    }
+    .p5-accent { color: #FFD700; }
+
+  </style>
+</head>
+<body>
+
+  <h1>space03 · Font & Palette Explorer · v0.2</h1>
+
+  <!-- FONTS -->
+  <section>
+    <p class="section-title">Font Options</p>
+    <div class="font-grid">
+
+      <div class="font-card">
+        <div class="font-label">01 — Clash Display</div>
+        <div class="font-demo-h f-clash">Crafting Creative Digital</div>
+        <div class="font-demo-sub">Geometric, retro-modern, very design-forward. Popular in editorial and creative portfolios.</div>
+      </div>
+
+      <div class="font-card">
+        <div class="font-label">02 — Bebas Neue</div>
+        <div class="font-demo-h f-bebas">Crafting Creative Digital</div>
+        <div class="font-demo-sub">Bold, condensed, high impact. Strong presence. Best paired with generous white space.</div>
+      </div>
+
+      <div class="font-card">
+        <div class="font-label">03 — Playfair Display Italic</div>
+        <div class="font-demo-h f-playfair">Crafting Creative Digital</div>
+        <div class="font-demo-sub">Elegant ink-trap serif with lots of texture. Sophisticated and timeless with a classic feel.</div>
+      </div>
+
+      <div class="font-card">
+        <div class="font-label">04 — Cabinet Grotesk</div>
+        <div class="font-demo-h f-cabinet">Crafting Creative Digital</div>
+        <div class="font-demo-sub">Quirky grotesque with personality. Youthful, distinctive, modern without being cold.</div>
+      </div>
+
+      <div class="font-card">
+        <div class="font-label">05 — Fraunces Italic</div>
+        <div class="font-demo-h f-fraunces">Crafting Creative Digital</div>
+        <div class="font-demo-sub">Optical serif with a "wonky" handcrafted feel. Warm, expressive, genuinely unique.</div>
+      </div>
+
+      <div class="font-card">
+        <div class="font-label">06 — Syne</div>
+        <div class="font-demo-h f-syne">Crafting Creative Digital</div>
+        <div class="font-demo-sub">Geometric with a unique rhythm. Very popular in design & art portfolios. Clean but alive.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PALETTES -->
+  <section>
+    <p class="section-title">Color Palette Options</p>
+    <div class="palette-grid">
+
+      <!-- 1 Warm Sunset -->
+      <div class="palette-card">
+        <div class="palette-hero p1-hero">
+          <div class="palette-name">01 — Warm Sunset</div>
+          <div class="palette-headline">Marshall Amoranto</div>
+        </div>
+        <div class="palette-body">
+          <div class="palette-swatches">
+            <div class="swatch" style="background:#FF9A3C;"></div>
+            <div class="swatch" style="background:#FF4E8A;"></div>
+            <div class="swatch" style="background:#7B2FBE;"></div>
+            <div class="swatch" style="background:#1A0A2E;"></div>
+          </div>
+          <div class="palette-desc">Amber → Rose → Plum. Warm, rich, editorial. Energetic but sophisticated.</div>
+        </div>
+      </div>
+
+      <!-- 2 Ocean Depth -->
+      <div class="palette-card">
+        <div class="palette-hero p2-hero">
+          <div class="palette-name">02 — Ocean Depth</div>
+          <div class="palette-headline">Marshall Amoranto</div>
+        </div>
+        <div class="palette-body">
+          <div class="palette-swatches">
+            <div class="swatch" style="background:#0ABFBC;"></div>
+            <div class="swatch" style="background:#2D4AE7;"></div>
+            <div class="swatch" style="background:#1A2560;"></div>
+            <div class="swatch" style="background:#0A0A1A;"></div>
+          </div>
+          <div class="palette-desc">Teal → Electric Blue → Near-black. Cool, deep, confident. Great for tech + design work.</div>
+        </div>
+      </div>
+
+      <!-- 3 Earthy Organic -->
+      <div class="palette-card">
+        <div class="palette-hero p3-hero">
+          <div class="palette-name">03 — Earthy Organic</div>
+          <div class="palette-headline">Marshall Amoranto</div>
+        </div>
+        <div class="palette-body">
+          <div class="palette-swatches">
+            <div class="swatch" style="background:#8DB87A;"></div>
+            <div class="swatch" style="background:#D4785A;"></div>
+            <div class="swatch" style="background:#E8C98A;"></div>
+            <div class="swatch" style="background:#2D2416;"></div>
+          </div>
+          <div class="palette-desc">Sage → Terracotta → Sand. Warm, natural, grounded. Reflects your environmentalist values.</div>
+        </div>
+      </div>
+
+      <!-- 4 Neon Minimal -->
+      <div class="palette-card">
+        <div class="palette-hero p4-hero">
+          <div class="palette-name">04 — Neon Minimal</div>
+          <div class="palette-headline">Marshall Amoranto</div>
+        </div>
+        <div class="palette-body">
+          <div class="palette-swatches">
+            <div class="swatch" style="background:#f5f5f5; border:1px solid #ddd;"></div>
+            <div class="swatch" style="background:#0f0f0f;"></div>
+            <div class="swatch" style="background:#00FF87;"></div>
+            <div class="swatch" style="background:#FF2D78;"></div>
+          </div>
+          <div class="palette-desc">White + black base, electric lime & hot pink accents. Bold, youthful, maximally modern.</div>
+        </div>
+      </div>
+
+      <!-- 5 Mono + Pop -->
+      <div class="palette-card">
+        <div class="palette-hero p5-hero">
+          <div class="palette-name">05 — Mono + Pop</div>
+          <div class="palette-headline">Marshall <span class="p5-accent">Amoranto</span></div>
+        </div>
+        <div class="palette-body">
+          <div class="palette-swatches">
+            <div class="swatch" style="background:#111;"></div>
+            <div class="swatch" style="background:#333;"></div>
+            <div class="swatch" style="background:#f5f5f5; border:1px solid #ddd;"></div>
+            <div class="swatch" style="background:#FFD700;"></div>
+          </div>
+          <div class="palette-desc">Black & white with a single gold accent. Timeless, editorial, effortlessly elegant.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
