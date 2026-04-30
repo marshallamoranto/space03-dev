@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>space03 — More Fonts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=Unbounded:wght@700;900&family=Righteous&family=Josefin+Sans:wght@700&family=Italiana&family=DM+Mono:wght@500&family=Bodoni+Moda:ital,wght@0,800;1,800&family=Space+Grotesk:wght@700&family=Anybody:ital,wght@1,800&family=DM+Sans:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@700&f[]=satoshi@700&f[]=general-sans@700&display=swap" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Warm Sunset palette throughout */
+    :root {
+      --grad: linear-gradient(135deg, #FF9A3C 0%, #FF4E8A 55%, #7B2FBE 100%);
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --muted: #555;
+    }
+
+    body {
+      background: var(--bg);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      padding: 40px 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    header h1 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .grad-bar {
+      height: 3px;
+      background: var(--grad);
+      border-radius: 999px;
+      width: 60px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .font-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .font-card {
+      background: var(--surface);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .font-card:hover { border-color: #FF4E8A; transform: translateY(-3px); }
+
+    .card-top {
+      padding: 28px 28px 20px;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .font-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .font-demo-h {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.05;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-bottom {
+      border-top: 1px solid var(--border);
+      padding: 16px 28px;
+    }
+
+    .font-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    .font-desc {
+      font-size: 12px;
+      color: #444;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    /* Font classes */
+    .f-cormorant { font-family: 'Cormorant Garamond', serif; font-style: italic; }
+    .f-unbounded { font-family: 'Unbounded', sans-serif; font-size: clamp(1.2rem,3vw,1.8rem) !important; }
+    .f-righteous  { font-family: 'Righteous', sans-serif; }
+    .f-josefin    { font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.05em; }
+    .f-italiana   { font-family: 'Italiana', serif; font-size: clamp(2rem,5vw,3rem) !important; }
+    .f-mono       { font-family: 'DM Mono', monospace; font-size: clamp(1.2rem,3vw,1.8rem) !important; }
+    .f-bodoni     { font-family: 'Bodoni Moda', serif; font-style: italic; }
+    .f-space      { font-family: 'Space Grotesk', sans-serif; }
+    .f-anybody    { font-family: 'Anybody', sans-serif; font-style: italic; font-weight: 800; }
+    .f-satoshi    { font-family: 'Satoshi', sans-serif; }
+    .f-general    { font-family: 'General Sans', sans-serif; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>space03 · More Font Options · Warm Sunset Palette</h1>
+    <div class="grad-bar"></div>
+  </header>
+
+  <p class="section-title">Round 2 — Font Exploration</p>
+
+  <div class="font-grid">
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">07 — Cormorant Garamond Italic</div>
+        <div class="font-demo-h f-cormorant">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Serif</span><span class="font-tag">Elegant</span><span class="font-tag">Textured</span>
+        <div class="font-desc">Razor-thin strokes with dramatic contrast. Ultra refined, almost fashion-editorial.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">08 — Unbounded</div>
+        <div class="font-demo-h f-unbounded">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Geometric</span><span class="font-tag">Futuristic</span><span class="font-tag">Bold</span>
+        <div class="font-desc">Wide, heavy, futuristic. Makes a real statement. Very contemporary design-world feel.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">09 — Righteous</div>
+        <div class="font-demo-h f-righteous">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Retro</span><span class="font-tag">Rounded</span><span class="font-tag">Fun</span>
+        <div class="font-desc">Retro-rounded with a warm, friendly energy. Youthful without trying too hard.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">10 — Josefin Sans</div>
+        <div class="font-demo-h f-josefin">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Geometric</span><span class="font-tag">Art Deco</span><span class="font-tag">Clean</span>
+        <div class="font-desc">Art deco geometry, very clean and structured. Timeless with a subtle vintage feel.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">11 — Italiana</div>
+        <div class="font-demo-h f-italiana">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Serif</span><span class="font-tag">Luxury</span><span class="font-tag">Tall</span>
+        <div class="font-desc">Tall, elegant, high-fashion serif. Minimal strokes, maximum presence. Very luxe.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">12 — DM Mono</div>
+        <div class="font-demo-h f-mono">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Monospace</span><span class="font-tag">Techy</span><span class="font-tag">Unexpected</span>
+        <div class="font-desc">Monospace for headlines — unexpected, techy, shows you can code. Bold creative choice.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">13 — Bodoni Moda Italic</div>
+        <div class="font-demo-h f-bodoni">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Serif</span><span class="font-tag">Editorial</span><span class="font-tag">Dramatic</span>
+        <div class="font-desc">Classic Bodoni with dramatic thick/thin contrast. Magazine editorial energy, very striking.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">14 — Space Grotesk</div>
+        <div class="font-demo-h f-space">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Grotesque</span><span class="font-tag">Quirky</span><span class="font-tag">Modern</span>
+        <div class="font-desc">Grotesque with quirky details — slightly irregular, full of character. A designer's font.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">15 — Anybody Italic</div>
+        <div class="font-demo-h f-anybody">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Display</span><span class="font-tag">Variable</span><span class="font-tag">Expressive</span>
+        <div class="font-desc">Wide italic display font with serious attitude. High energy, very current in design circles.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">16 — Satoshi</div>
+        <div class="font-demo-h f-satoshi">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Modern</span><span class="font-tag">Balanced</span><span class="font-tag">Versatile</span>
+        <div class="font-desc">Clean, balanced, modern grotesque. Highly readable, feels premium without being cold.</div>
+      </div>
+    </div>
+
+    <div class="font-card">
+      <div class="card-top">
+        <div class="font-label">17 — General Sans</div>
+        <div class="font-demo-h f-general">Crafting Creative Digital</div>
+      </div>
+      <div class="card-bottom">
+        <span class="font-tag">Geometric</span><span class="font-tag">Friendly</span><span class="font-tag">Versatile</span>
+        <div class="font-desc">Geometric sans with humanist warmth. Approachable, modern, works beautifully at any size.</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
