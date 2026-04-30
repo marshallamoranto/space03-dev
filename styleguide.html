@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>space03 — Style Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       SPACE03 — STYLE GUIDE
+       Modern · Minimalist · Youthful · Textured
+    ============================================= */
+
+    :root {
+      /* --- COLOR PALETTE --- */
+      --color-bg:         #F8F7F5;      /* warm off-white, not sterile */
+      --color-surface:    #FFFFFF;
+      --color-ink:        #1A1A2E;      /* deep navy-black */
+      --color-ink-muted:  #6B6B80;      /* secondary text */
+
+      /* Accent — youthful, punchy */
+      --color-accent-1:   #FF6B6B;      /* coral-red */
+      --color-accent-2:   #6C63FF;      /* electric violet */
+      --color-accent-3:   #43E6B5;      /* mint green */
+
+      /* Gradients */
+      --grad-hero:        linear-gradient(135deg, #6C63FF 0%, #FF6B6B 60%, #43E6B5 100%);
+      --grad-card:        linear-gradient(145deg, rgba(108,99,255,0.08) 0%, rgba(255,107,107,0.06) 100%);
+      --grad-subtle:      linear-gradient(180deg, #F8F7F5 0%, #EEE9FF 100%);
+
+      /* --- TYPOGRAPHY --- */
+      --font-display:     'DM Serif Display', Georgia, serif;
+      --font-body:        'DM Sans', system-ui, sans-serif;
+
+      /* --- SPACING --- */
+      --space-xs:  4px;
+      --space-sm:  8px;
+      --space-md:  16px;
+      --space-lg:  32px;
+      --space-xl:  64px;
+
+      /* --- RADIUS --- */
+      --radius-sm:  8px;
+      --radius-md:  16px;
+      --radius-lg:  24px;
+      --radius-xl:  40px;
+      --radius-pill: 999px;
+
+      /* --- SHADOWS --- */
+      --shadow-sm:  0 2px 8px rgba(26,26,46,0.06);
+      --shadow-md:  0 8px 32px rgba(26,26,46,0.10);
+      --shadow-lg:  0 24px 64px rgba(26,26,46,0.14);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      padding: var(--space-xl) var(--space-lg);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* --- GUIDE SECTIONS --- */
+    .sg-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-ink-muted);
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid rgba(26,26,46,0.08);
+    }
+    section { margin-bottom: var(--space-xl); }
+
+    /* ===== HEADER ===== */
+    .sg-header {
+      margin-bottom: var(--space-xl);
+    }
+    .sg-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      background: var(--grad-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .sg-header p {
+      color: var(--color-ink-muted);
+      font-size: 14px;
+      margin-top: var(--space-sm);
+      font-weight: 300;
+    }
+
+    /* ===== COLORS ===== */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: var(--space-md);
+    }
+    .color-swatch {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .swatch-block {
+      height: 80px;
+    }
+    .swatch-info {
+      background: var(--color-surface);
+      padding: var(--space-sm) var(--space-md);
+      font-size: 12px;
+    }
+    .swatch-info strong { display: block; font-weight: 500; }
+    .swatch-info span { color: var(--color-ink-muted); font-size: 11px; }
+
+    .grad-strip {
+      height: 80px;
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-sm);
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .type-stack { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .type-row { display: flex; align-items: baseline; gap: var(--space-lg); flex-wrap: wrap; }
+    .type-meta { font-size: 11px; color: var(--color-ink-muted); min-width: 120px; font-weight: 500; }
+
+    h1.demo { font-family: var(--font-display); font-size: clamp(2rem,5vw,3rem); line-height:1.1; }
+    h2.demo { font-family: var(--font-display); font-size: clamp(1.4rem,3vw,2rem); font-style: italic; line-height:1.2; }
+    h3.demo { font-family: var(--font-body); font-size: 1.25rem; font-weight: 700; }
+    p.demo  { font-family: var(--font-body); font-size: 1rem; font-weight: 400; color: var(--color-ink-muted); max-width: 480px; }
+    .label-demo { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ink-muted); }
+
+    /* ===== BUTTONS ===== */
+    .btn-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      text-decoration: none;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    .btn-primary {
+      background: var(--grad-hero);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: var(--radius-pill);
+    }
+    .btn-secondary {
+      background: var(--color-surface);
+      color: var(--color-ink);
+      padding: 11px 27px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid rgba(26,26,46,0.12);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-accent-2);
+      padding: 11px 20px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--color-accent-2);
+    }
+    .btn-sm {
+      padding: 8px 18px;
+      font-size: 12px;
+      border-radius: var(--radius-pill);
+      background: var(--color-surface);
+      border: 1.5px solid rgba(26,26,46,0.10);
+      color: var(--color-ink-muted);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ===== CARDS ===== */
+    .card-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-md); }
+
+    .card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+    .card-thumb {
+      height: 140px;
+      background: var(--grad-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .card-thumb.v2 { background: linear-gradient(135deg, rgba(67,230,181,0.15), rgba(108,99,255,0.15)); }
+    .card-thumb.v3 { background: linear-gradient(135deg, rgba(255,107,107,0.12), rgba(255,200,80,0.12)); }
+
+    .card-body { padding: var(--space-md) var(--space-md) var(--space-lg); }
+    .card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent-2);
+      margin-bottom: var(--space-xs);
+    }
+    .card-title { font-weight: 600; font-size: 15px; margin-bottom: var(--space-xs); }
+    .card-desc { font-size: 13px; color: var(--color-ink-muted); }
+
+    /* ===== TAGS / PILLS ===== */
+    .tag-row { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: var(--radius-pill);
+    }
+    .tag-violet { background: rgba(108,99,255,0.1); color: var(--color-accent-2); }
+    .tag-coral  { background: rgba(255,107,107,0.1); color: var(--color-accent-1); }
+    .tag-mint   { background: rgba(67,230,181,0.15); color: #1a9e78; }
+    .tag-neutral{ background: rgba(26,26,46,0.06);   color: var(--color-ink-muted); }
+
+    /* ===== RADIUS DEMO ===== */
+    .radius-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: flex-end; }
+    .radius-block {
+      background: var(--grad-card);
+      border: 1.5px solid rgba(108,99,255,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90px;
+      height: 90px;
+      font-size: 11px;
+      color: var(--color-ink-muted);
+      font-weight: 500;
+      gap: 4px;
+    }
+    .radius-block span { font-size: 10px; }
+
+    /* ===== TEXTURE NOTE ===== */
+    .texture-box {
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      background: var(--grad-subtle);
+      border: 1px solid rgba(108,99,255,0.1);
+      font-size: 14px;
+      color: var(--color-ink-muted);
+      line-height: 1.8;
+    }
+    .texture-box strong { color: var(--color-ink); }
+
+  </style>
+</head>
+<body>
+
+  <header class="sg-header">
+    <h1>space03 Style Guide</h1>
+    <p>Modern · Minimalist · Youthful · Marshall Amoranto — v0.1 (2026-04-30)</p>
+  </header>
+
+  <!-- COLORS -->
+  <section>
+    <p class="sg-label">Color Palette</p>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#F8F7F5;border:1px solid #eee;"></div>
+        <div class="swatch-info"><strong>Background</strong><span>#F8F7F5</span></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#1A1A2E;"></div>
+        <div class="swatch-info"><strong>Ink</strong><span>#1A1A2E</span></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#6B6B80;"></div>
+        <div class="swatch-info"><strong>Ink Muted</strong><span>#6B6B80</span></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#6C63FF;"></div>
+        <div class="swatch-info"><strong>Violet</strong><span>#6C63FF</span></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#FF6B6B;"></div>
+        <div class="swatch-info"><strong>Coral</strong><span>#FF6B6B</span></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#43E6B5;"></div>
+        <div class="swatch-info"><strong>Mint</strong><span>#43E6B5</span></div>
+      </div>
+    </div>
+
+    <br/>
+    <p class="sg-label">Gradients</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
+      <div>
+        <div class="grad-strip" style="background:linear-gradient(135deg,#6C63FF 0%,#FF6B6B 60%,#43E6B5 100%);"></div>
+        <p style="font-size:12px;color:var(--color-ink-muted);">Hero gradient — Violet → Coral → Mint</p>
+      </div>
+      <div>
+        <div class="grad-strip" style="background:linear-gradient(145deg,rgba(108,99,255,0.1),rgba(255,107,107,0.07));"></div>
+        <p style="font-size:12px;color:var(--color-ink-muted);">Card tint — subtle violet/coral wash</p>
+      </div>
+      <div>
+        <div class="grad-strip" style="background:linear-gradient(180deg,#F8F7F5 0%,#EEE9FF 100%);"></div>
+        <p style="font-size:12px;color:var(--color-ink-muted);">Page background — warm to lavender</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section>
+    <p class="sg-label">Typography</p>
+    <div class="type-stack">
+      <div class="type-row">
+        <div class="type-meta">DM Serif Display<br/>H1 · 48px</div>
+        <h1 class="demo">Crafting Creative Digital</h1>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">DM Serif Display Italic<br/>H2 · 32px</div>
+        <h2 class="demo">Portfolio & Work</h2>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">DM Sans Bold<br/>H3 · 20px</div>
+        <h3 class="demo">Project Title</h3>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">DM Sans Regular<br/>Body · 16px</div>
+        <p class="demo">Graphic and production designer passionate about nature, sustainability, and design that means something.</p>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">DM Sans<br/>Label · 11px caps</div>
+        <span class="label-demo">From the Portfolio</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section>
+    <p class="sg-label">Buttons</p>
+    <div class="btn-row">
+      <a href="#" class="btn btn-primary">View My Work</a>
+      <a href="#" class="btn btn-secondary">Download Resume</a>
+      <a href="#" class="btn btn-ghost">Get In Touch</a>
+      <a href="#" class="btn btn-sm">Branding</a>
+      <a href="#" class="btn btn-sm">Web Design</a>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section>
+    <p class="sg-label">Portfolio Cards</p>
+    <div class="card-row">
+      <div class="card">
+        <div class="card-thumb">🎨</div>
+        <div class="card-body">
+          <div class="card-tag">Branding</div>
+          <div class="card-title">Project Name</div>
+          <div class="card-desc">Brand identity, print, digital.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb v2">🌿</div>
+        <div class="card-body">
+          <div class="card-tag">Web Design</div>
+          <div class="card-title">Project Name</div>
+          <div class="card-desc">HTML/CSS, layout, interaction.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb v3">✦</div>
+        <div class="card-body">
+          <div class="card-tag">Production</div>
+          <div class="card-title">Project Name</div>
+          <div class="card-desc">Print-ready layouts & assets.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAGS -->
+  <section>
+    <p class="sg-label">Skill Tags / Category Pills</p>
+    <div class="tag-row">
+      <span class="tag tag-violet">Illustrator</span>
+      <span class="tag tag-violet">Photoshop</span>
+      <span class="tag tag-coral">After Effects</span>
+      <span class="tag tag-coral">InDesign</span>
+      <span class="tag tag-mint">HTML</span>
+      <span class="tag tag-mint">CSS</span>
+      <span class="tag tag-neutral">Print</span>
+      <span class="tag tag-neutral">Branding</span>
+    </div>
+  </section>
+
+  <!-- RADIUS -->
+  <section>
+    <p class="sg-label">Border Radius System</p>
+    <div class="radius-row">
+      <div class="radius-block" style="border-radius:8px;">8px<span>sm</span></div>
+      <div class="radius-block" style="border-radius:16px;">16px<span>md</span></div>
+      <div class="radius-block" style="border-radius:24px;">24px<span>lg</span></div>
+      <div class="radius-block" style="border-radius:40px;">40px<span>xl</span></div>
+      <div class="radius-block" style="border-radius:999px;width:90px;height:40px;">pill</div>
+    </div>
+  </section>
+
+  <!-- TEXTURE / SURFACE NOTE -->
+  <section>
+    <p class="sg-label">Texture & Surface Notes</p>
+    <div class="texture-box">
+      <strong>Background:</strong> Warm off-white (#F8F7F5) — avoids the cold sterility of pure white.<br/>
+      <strong>Texture:</strong> Subtle grain/noise overlay (CSS or SVG filter) added to hero section for tactile feel — keeps it from looking too flat.<br/>
+      <strong>Cards:</strong> White surfaces with very soft drop shadows — depth without heaviness.<br/>
+      <strong>Accents:</strong> Color used sparingly — tags, hover states, gradient hero. White space does the heavy lifting.<br/>
+      <strong>Motion:</strong> All transitions 150–250ms ease. Cards lift on hover. Hero animates on load.
+    </div>
+  </section>
+
+</body>
+</html>
