@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>space03 — 70s Record Deep Dive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #F2E8D9;
+      color: #1C1007;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ─── SECTION LABEL ─── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #A0876A;
+      text-align: center;
+      padding: 48px 20px 20px;
+    }
+
+    .section-note {
+      font-size: 12px;
+      color: #B09070;
+      text-align: center;
+      padding-bottom: 32px;
+      font-style: italic;
+    }
+
+    /* ─── HERO VARIANT A: WARM LIGHT BACKGROUND ─── */
+    .hero-a {
+      background: #F2E8D9;
+      padding: 80px 40px;
+      text-align: center;
+      border-bottom: 3px solid #E8B86D;
+    }
+
+    .hero-a .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #C4583B;
+      margin-bottom: 16px;
+    }
+
+    .hero-a h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(3rem, 10vw, 7rem);
+      color: #1C1007;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .hero-a .tagline {
+      font-size: 16px;
+      color: #7A5C40;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── HERO VARIANT B: DARK BACKGROUND ─── */
+    .hero-b {
+      background: #1C1007;
+      padding: 80px 40px;
+      text-align: center;
+      border-bottom: 3px solid #C4583B;
+    }
+
+    .hero-b .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #E8B86D;
+      margin-bottom: 16px;
+    }
+
+    .hero-b h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(3rem, 10vw, 7rem);
+      color: #F2E8D9;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .hero-b .tagline {
+      font-size: 16px;
+      color: #A0876A;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── HERO VARIANT C: FOREST DARK ─── */
+    .hero-c {
+      background: #2B4A3F;
+      padding: 80px 40px;
+      text-align: center;
+      border-bottom: 3px solid #E8B86D;
+    }
+
+    .hero-c .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #E8B86D;
+      margin-bottom: 16px;
+    }
+
+    .hero-c h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(3rem, 10vw, 7rem);
+      color: #F2E8D9;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .hero-c .tagline {
+      font-size: 16px;
+      color: #A8C5A0;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── HERO VARIANT D: RUST BOLD ─── */
+    .hero-d {
+      background: #C4583B;
+      padding: 80px 40px;
+      text-align: center;
+      border-bottom: 3px solid #1C1007;
+    }
+
+    .hero-d .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #F2E8D9;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .hero-d h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(3rem, 10vw, 7rem);
+      color: #F2E8D9;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .hero-d .tagline {
+      font-size: 16px;
+      color: #F2E8D9;
+      opacity: 0.8;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── HERO VARIANT E: GRADIENT FULL ─── */
+    .hero-e {
+      background: linear-gradient(160deg, #F2E8D9 0%, #E8B86D 35%, #C4583B 65%, #2B4A3F 100%);
+      padding: 80px 40px;
+      text-align: center;
+      border-bottom: 3px solid #1C1007;
+    }
+
+    .hero-e .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #1C1007;
+      opacity: 0.5;
+      margin-bottom: 16px;
+    }
+
+    .hero-e h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(3rem, 10vw, 7rem);
+      color: #1C1007;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .hero-e .tagline {
+      font-size: 16px;
+      color: #1C1007;
+      opacity: 0.65;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── HERO VARIANT F: GRAIN TEXTURE FEEL (DARK + GOLD) ─── */
+    .hero-f {
+      background: #2B1A0A;
+      padding: 80px 40px;
+      text-align: center;
+      border-bottom: 3px solid #E8B86D;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-f::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, #E8B86D22 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-f .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #E8B86D;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .hero-f h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(3rem, 10vw, 7rem);
+      color: #E8B86D;
+      line-height: 1;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .hero-f .tagline {
+      font-size: 16px;
+      color: #A0876A;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    /* ─── SWATCH ROW ─── */
+    .swatch-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+      background: #F2E8D9;
+    }
+
+    .swatch-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .swatch-block .sw {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .swatch-block span {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #A0876A;
+      text-transform: uppercase;
+    }
+
+    /* ─── MINI CARD ROW ─── */
+    .card-row {
+      display: flex;
+      gap: 16px;
+      padding: 32px 40px;
+      background: #F2E8D9;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .mini-card {
+      flex: 0 0 200px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .mini-card-bg {
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      padding: 14px;
+    }
+
+    .mini-card-bg span {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.1rem;
+    }
+
+    .mini-card-footer {
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #7A5C40;
+      background: #EDE0CC;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      height: 1px;
+      background: #DDD0BC;
+      margin: 0 40px;
+    }
+
+    /* ─── NAV MOCKUP ─── */
+    .nav-mock {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+    }
+
+    .nav-mock .logo {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.3rem;
+    }
+
+    .nav-mock .links {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .nav-mock .links span {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+
+    .nav-mock .links span:last-child {
+      opacity: 1;
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- SWATCH REFERENCE -->
+  <div class="section-label">Core Palette — 70s Record</div>
+  <div class="swatch-row">
+    <div class="swatch-block"><div class="sw" style="background:#F2E8D9;"></div><span>Cream</span></div>
+    <div class="swatch-block"><div class="sw" style="background:#E8B86D;"></div><span>Gold</span></div>
+    <div class="swatch-block"><div class="sw" style="background:#C4583B;"></div><span>Rust</span></div>
+    <div class="swatch-block"><div class="sw" style="background:#2B4A3F;"></div><span>Forest</span></div>
+    <div class="swatch-block"><div class="sw" style="background:#1C1007;"></div><span>Espresso</span></div>
+    <div class="swatch-block"><div class="sw" style="background:#A8C5A0;"></div><span>Sage</span></div>
+  </div>
+
+  <div class="section-note">6 variations of how this palette could feel on your homepage</div>
+
+  <!-- A: WARM LIGHT -->
+  <p class="section-label" style="padding-top:24px;">A — Warm Light Background (Cream base)</p>
+  <div class="nav-mock" style="background:#F2E8D9; color:#1C1007;">
+    <div class="logo" style="color:#1C1007;">Marshall Amoranto</div>
+    <div class="links" style="color:#1C1007;">
+      <span>Work</span><span>About</span><span>Contact</span>
+      <span style="background:#C4583B; color:#F2E8D9;">Hire me</span>
+    </div>
+  </div>
+  <div class="hero-a">
+    <div class="eyebrow">Creative Director & Designer</div>
+    <h1>Marshall<br>Amoranto</h1>
+    <p class="tagline">Brand, motion, and digital experiences with a lot of heart.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- B: DARK ESPRESSO -->
+  <p class="section-label">B — Dark Espresso Background</p>
+  <div class="nav-mock" style="background:#1C1007; color:#F2E8D9;">
+    <div class="logo" style="color:#E8B86D;">Marshall Amoranto</div>
+    <div class="links" style="color:#F2E8D9;">
+      <span>Work</span><span>About</span><span>Contact</span>
+      <span style="background:#C4583B; color:#F2E8D9;">Hire me</span>
+    </div>
+  </div>
+  <div class="hero-b">
+    <div class="eyebrow">Creative Director & Designer</div>
+    <h1>Marshall<br>Amoranto</h1>
+    <p class="tagline">Brand, motion, and digital experiences with a lot of heart.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- C: FOREST -->
+  <p class="section-label">C — Deep Forest Background</p>
+  <div class="nav-mock" style="background:#2B4A3F; color:#F2E8D9;">
+    <div class="logo" style="color:#E8B86D;">Marshall Amoranto</div>
+    <div class="links" style="color:#F2E8D9;">
+      <span>Work</span><span>About</span><span>Contact</span>
+      <span style="background:#E8B86D; color:#1C1007;">Hire me</span>
+    </div>
+  </div>
+  <div class="hero-c">
+    <div class="eyebrow">Creative Director & Designer</div>
+    <h1>Marshall<br>Amoranto</h1>
+    <p class="tagline">Brand, motion, and digital experiences with a lot of heart.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- D: RUST BOLD -->
+  <p class="section-label">D — Rust Bold Background</p>
+  <div class="nav-mock" style="background:#C4583B; color:#F2E8D9;">
+    <div class="logo" style="color:#F2E8D9;">Marshall Amoranto</div>
+    <div class="links" style="color:#F2E8D9;">
+      <span>Work</span><span>About</span><span>Contact</span>
+      <span style="background:#1C1007; color:#F2E8D9;">Hire me</span>
+    </div>
+  </div>
+  <div class="hero-d">
+    <div class="eyebrow">Creative Director & Designer</div>
+    <h1>Marshall<br>Amoranto</h1>
+    <p class="tagline">Brand, motion, and digital experiences with a lot of heart.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- E: FULL GRADIENT -->
+  <p class="section-label">E — Full Palette Gradient</p>
+  <div class="nav-mock" style="background:linear-gradient(90deg,#F2E8D9,#E8B86D); color:#1C1007;">
+    <div class="logo" style="color:#1C1007;">Marshall Amoranto</div>
+    <div class="links" style="color:#1C1007;">
+      <span>Work</span><span>About</span><span>Contact</span>
+      <span style="background:#2B4A3F; color:#F2E8D9;">Hire me</span>
+    </div>
+  </div>
+  <div class="hero-e">
+    <div class="eyebrow">Creative Director & Designer</div>
+    <h1>Marshall<br>Amoranto</h1>
+    <p class="tagline">Brand, motion, and digital experiences with a lot of heart.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- F: DARK GOLD GLOW -->
+  <p class="section-label">F — Dark Espresso + Gold Glow</p>
+  <div class="nav-mock" style="background:#2B1A0A; color:#E8B86D;">
+    <div class="logo" style="color:#E8B86D;">Marshall Amoranto</div>
+    <div class="links" style="color:#A0876A;">
+      <span>Work</span><span>About</span><span>Contact</span>
+      <span style="background:#E8B86D; color:#1C1007;">Hire me</span>
+    </div>
+  </div>
+  <div class="hero-f">
+    <div class="eyebrow">Creative Director & Designer</div>
+    <h1>Marshall<br>Amoranto</h1>
+    <p class="tagline">Brand, motion, and digital experiences with a lot of heart.</p>
+  </div>
+
+  <!-- MINI CARD SAMPLES -->
+  <div class="section-label" style="background:#F2E8D9; color:#A0876A;">Portfolio Card Samples</div>
+  <div class="card-row">
+
+    <div class="mini-card">
+      <div class="mini-card-bg" style="background:#1C1007;">
+        <span style="color:#E8B86D;">Project Name</span>
+      </div>
+      <div class="mini-card-footer">Brand Identity · 2024</div>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-bg" style="background:#C4583B;">
+        <span style="color:#F2E8D9;">Project Name</span>
+      </div>
+      <div class="mini-card-footer">Motion Design · 2024</div>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-bg" style="background:#2B4A3F;">
+        <span style="color:#E8B86D;">Project Name</span>
+      </div>
+      <div class="mini-card-footer">Web Design · 2024</div>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-bg" style="background:#E8B86D;">
+        <span style="color:#1C1007;">Project Name</span>
+      </div>
+      <div class="mini-card-footer">Art Direction · 2024</div>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-bg" style="background:linear-gradient(135deg,#E8B86D,#C4583B);">
+        <span style="color:#F2E8D9;">Project Name</span>
+      </div>
+      <div class="mini-card-footer">Campaign · 2024</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
