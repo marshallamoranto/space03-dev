@@ -37,13 +37,13 @@
       padding: 20px 48px;
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      transition: background 1.2s ease;
+      transition: background 0.9s ease;
     }
 
     nav .logo {
       font-family: 'Permanent Marker', cursive;
       font-size: 1.25rem;
-      transition: color 1.2s ease;
+      transition: color 0.9s ease;
     }
 
     nav .links {
@@ -57,7 +57,7 @@
     nav .links a {
       text-decoration: none;
       opacity: 0.5;
-      transition: opacity 0.2s, color 1.2s ease;
+      transition: opacity 0.2s, color 0.9s ease;
     }
     nav .links a:hover { opacity: 1; }
 
@@ -68,7 +68,7 @@
       font-weight: 600;
       text-decoration: none;
       opacity: 1 !important;
-      transition: background 1.2s ease, color 1.2s ease;
+      transition: background 0.9s ease, color 0.9s ease;
     }
 
     /* ─── HERO ─── */
@@ -81,8 +81,17 @@
       gap: 48px;
       position: relative;
       overflow: hidden;
-      transition: background 1.2s ease;
+      background: transparent;
     }
+
+    /* crossfade background layers */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      transition: opacity 0.9s ease;
+      z-index: 0;
+    }
+    .hero-bg.hidden { opacity: 0; }
 
     #hero-canvas {
       position: absolute;
@@ -104,7 +113,7 @@
       text-transform: uppercase;
       opacity: 0.45;
       margin-bottom: 20px;
-      transition: color 1.2s ease;
+      transition: color 0.9s ease;
     }
 
     .hero-name {
@@ -112,7 +121,7 @@
       font-size: clamp(3.5rem, 8vw, 7rem);
       line-height: 1;
       margin-bottom: 28px;
-      transition: color 1.2s ease;
+      transition: color 0.9s ease;
     }
 
     .hero-tagline {
@@ -121,7 +130,7 @@
       line-height: 1.7;
       max-width: 380px;
       margin-bottom: 40px;
-      transition: color 1.2s ease;
+      transition: color 0.9s ease;
     }
 
     .hero-actions {
@@ -136,7 +145,7 @@
       font-size: 14px;
       font-weight: 700;
       text-decoration: none;
-      transition: background 1.2s ease, color 1.2s ease;
+      transition: background 0.9s ease, color 0.9s ease;
     }
 
     .btn-secondary {
@@ -147,7 +156,7 @@
       font-weight: 600;
       text-decoration: none;
       opacity: 0.55;
-      transition: color 1.2s ease, border-color 1.2s ease;
+      transition: color 0.9s ease, border-color 0.9s ease;
     }
     .btn-secondary:hover { opacity: 1; }
 
@@ -158,7 +167,7 @@
       padding: 22px 30px;
       min-width: 200px;
       border: 1px solid rgba(255,255,255,0.1);
-      transition: background 1.2s ease;
+      transition: background 0.9s ease;
     }
 
     .stat-num {
@@ -166,7 +175,7 @@
       font-size: 2.4rem;
       line-height: 1;
       margin-bottom: 4px;
-      transition: color 1.2s ease;
+      transition: color 0.9s ease;
     }
 
     .stat-label {
@@ -174,7 +183,7 @@
       font-weight: 500;
       opacity: 0.45;
       letter-spacing: 0.05em;
-      transition: color 1.2s ease;
+      transition: color 0.9s ease;
     }
 
     /* palette indicator dots */
@@ -435,6 +444,8 @@
 
   <!-- HERO -->
   <section class="hero" id="hero">
+    <div class="hero-bg" id="hero-bg-a"></div>
+    <div class="hero-bg hidden" id="hero-bg-b"></div>
     <canvas id="hero-canvas"></canvas>
 
     <div class="hero-left">
@@ -679,6 +690,8 @@
 
     /* ── element refs ── */
     const hero       = document.getElementById('hero');
+    const bgA        = document.getElementById('hero-bg-a');
+    const bgB        = document.getElementById('hero-bg-b');
     const nav        = document.getElementById('site-nav');
     const navLogo    = document.getElementById('nav-logo');
     const navLinks   = document.querySelectorAll('nav .links a:not(.cta)');
@@ -695,6 +708,9 @@
     ];
     const dotsWrap   = document.getElementById('palette-dots');
 
+    // which bg layer is currently "on top" (visible)
+    let activeBg = 'a'; // 'a' or 'b'
+
     /* ── build indicator dots ── */
     const dots = PALETTES.map((p, i) => {
       const d = document.createElement('div');
@@ -710,19 +726,22 @@
       current = idx;
       const p = PALETTES[idx];
 
-      // hero background (handle gradient vs solid)
-      if (p.heroBg.startsWith('linear') || p.heroBg.startsWith('radial')) {
-        hero.style.background = p.heroBg;
-      } else {
-        hero.style.background = p.heroBg;
-        if (p.heroGrad) {
-          // layer the overlay on top via a pseudo — use a sibling div instead
-          heroOverlay.style.background = p.heroGrad;
-        } else {
-          heroOverlay.style.background = 'none';
-        }
-      }
+      // crossfade background using two layers
+      // paint the incoming layer (currently hidden), then swap visibility
+      const incoming = activeBg === 'a' ? bgB : bgA;
+      const outgoing = activeBg === 'a' ? bgA : bgB;
 
+      // build the full background for the incoming layer
+      let bgValue = p.heroBg;
+      if (p.heroGrad) {
+        bgValue = p.heroGrad + ', ' + p.heroBg;  // overlay gradient on top of base color
+      }
+      incoming.style.background = bgValue;
+      incoming.classList.remove('hidden'); // fade in
+      outgoing.classList.add('hidden');    // fade out
+      activeBg = activeBg === 'a' ? 'b' : 'a';
+
+      // nav + text colors (CSS transitions handle the fade)
       nav.style.background    = p.navBg;
       navLogo.style.color     = p.navLogo;
       navLinks.forEach(l => l.style.color = p.navLinks);
@@ -744,20 +763,21 @@
         label.style.color     = p.pillLabel;
       });
 
-      // update canvas colors
       canvasColors = p.canvasColors;
-
-      // dots
       dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     }
 
-    /* ── hero overlay div for gradient texture ── */
-    const heroOverlay = document.createElement('div');
-    heroOverlay.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;transition:background 1.2s ease;';
-    hero.insertBefore(heroOverlay, hero.firstChild);
+    /* ── initialise first palette instantly (no transition) ── */
+    bgA.style.transition = 'none';
+    bgB.style.transition = 'none';
+    applyPalette(0);
+    // re-enable transitions after first paint
+    requestAnimationFrame(() => {
+      bgA.style.transition = '';
+      bgB.style.transition = '';
+    });
 
     /* ── auto-rotate ── */
-    applyPalette(0);
     setInterval(() => applyPalette((current + 1) % PALETTES.length), INTERVAL_MS);
 
 
