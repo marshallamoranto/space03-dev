@@ -655,7 +655,7 @@
         for (let j = i + 1; j < nodes.length; j++) {
           const d = dist(nodes[i], nodes[j]);
           if (d > CONNECT_DIST) continue;
-          const alpha = (1 - d / CONNECT_DIST) * 0.13;
+          const alpha = (1 - d / CONNECT_DIST) * 0.10;
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
           ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -677,7 +677,7 @@
             ctx.lineTo(nodes[j].x, nodes[j].y);
             ctx.lineTo(nodes[k].x, nodes[k].y);
             ctx.closePath();
-            ctx.fillStyle = COLORS[0] + '0.04)';
+            ctx.fillStyle = COLORS[0] + '0.010)';
             ctx.fill();
           }
         }
@@ -687,7 +687,7 @@
       for (const n of nodes) {
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = COLORS[n.ci] + '0.2)';
+        ctx.fillStyle = COLORS[n.ci] + '0.10)';
         ctx.fill();
       }
 
