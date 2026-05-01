@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>space03 — Option D Full Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #F2E8D9;
+      --gold:    #E8B86D;
+      --rust:    #C4583B;
+      --forest:  #2B4A3F;
+      --espresso:#1C1007;
+      --sage:    #A8C5A0;
+      --rust-dark: #9E3E27;
+      --rust-light: #D9714F;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--rust);
+      color: var(--cream);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      background: rgba(196,88,59,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(242,232,217,0.1);
+    }
+
+    nav .logo {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.25rem;
+      color: var(--cream);
+    }
+
+    nav .links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    nav .links a {
+      text-decoration: none;
+      color: var(--cream);
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    nav .links a:hover { opacity: 1; }
+
+    nav .cta {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 8px 20px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      opacity: 1 !important;
+      transition: background 0.2s;
+    }
+    nav .cta:hover { background: var(--forest); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      background: var(--rust);
+      padding: 80px 48px;
+      gap: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle texture overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(232,184,109,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 10% 90%, rgba(28,16,7,0.25) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-left { position: relative; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.45;
+      margin-bottom: 20px;
+    }
+
+    .hero-name {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+
+    .hero-tagline {
+      font-size: 18px;
+      color: var(--cream);
+      opacity: 0.7;
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--cream);
+      color: var(--espresso);
+      padding: 14px 28px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold); }
+
+    .btn-secondary {
+      border: 2px solid rgba(242,232,217,0.4);
+      color: var(--cream);
+      padding: 12px 28px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: border-color 0.2s, opacity 0.2s;
+      opacity: 0.7;
+    }
+    .btn-secondary:hover { opacity: 1; border-color: var(--cream); }
+
+    /* hero right: floating cards */
+    .hero-right {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .stat-pill {
+      background: rgba(28,16,7,0.22);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(242,232,217,0.12);
+      border-radius: 18px;
+      padding: 22px 30px;
+      min-width: 200px;
+    }
+
+    .stat-num {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 2.4rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--cream);
+      opacity: 0.45;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── MARQUEE STRIP ─── */
+    .marquee-strip {
+      background: var(--espresso);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 1px solid rgba(242,232,217,0.05);
+      border-bottom: 1px solid rgba(242,232,217,0.05);
+    }
+
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 22s linear infinite;
+    }
+
+    .marquee-inner span {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 0 32px;
+      opacity: 0.7;
+    }
+
+    .marquee-inner span.dot {
+      color: var(--rust);
+      margin: 0 4px;
+      opacity: 1;
+    }
+
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── WORK SECTION ─── */
+    .work-section {
+      padding: 96px 48px;
+      background: var(--cream);
+      color: var(--espresso);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 2.4rem;
+      color: var(--espresso);
+    }
+
+    .section-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--rust);
+      text-decoration: none;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .work-card {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(28,16,7,0.08);
+      transition: transform 0.25s;
+      cursor: pointer;
+      background: var(--cream);
+    }
+    .work-card:hover { transform: translateY(-5px); }
+
+    .work-card-img {
+      height: 210px;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+
+    .work-card-img span {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.3rem;
+    }
+
+    .work-card-meta {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(28,16,7,0.07);
+    }
+
+    .work-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--espresso);
+      margin-bottom: 4px;
+    }
+
+    .work-card-tag {
+      font-size: 11px;
+      color: var(--espresso);
+      opacity: 0.4;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ─── ABOUT SECTION ─── */
+    .about-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .about-left {
+      padding: 80px 48px;
+      background: var(--espresso);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-left h2 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .about-left p {
+      font-size: 15px;
+      color: var(--cream);
+      opacity: 0.55;
+      line-height: 1.8;
+      max-width: 380px;
+      margin-bottom: 32px;
+    }
+
+    .about-left a {
+      display: inline-block;
+      background: var(--rust);
+      color: var(--cream);
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .about-right {
+      padding: 80px 48px;
+      background: var(--rust);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .service-item {
+      border-bottom: 1px solid rgba(242,232,217,0.12);
+      padding: 24px 0;
+    }
+    .service-item:first-child { padding-top: 0; }
+    .service-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .service-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .service-desc {
+      font-size: 13px;
+      color: var(--cream);
+      opacity: 0.45;
+      line-height: 1.6;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-section {
+      padding: 100px 48px;
+      background: var(--forest);
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      color: var(--cream);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .contact-section p {
+      font-size: 16px;
+      color: var(--sage);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      background: var(--rust);
+      color: var(--cream);
+      padding: 16px 36px;
+      border-radius: 99px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .contact-btn:hover { background: var(--gold); color: var(--espresso); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--espresso);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer .logo {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1rem;
+      color: var(--rust);
+    }
+
+    footer .copy {
+      font-size: 11px;
+      color: var(--cream);
+      opacity: 0.2;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 720px) {
+      nav { padding: 16px 24px; }
+      nav .links { gap: 16px; }
+      .hero { grid-template-columns: 1fr; padding: 60px 24px; min-height: auto; }
+      .hero-right { flex-direction: row; flex-wrap: wrap; }
+      .work-grid { grid-template-columns: 1fr; }
+      .about-section { grid-template-columns: 1fr; }
+      .work-section, .contact-section { padding: 64px 24px; }
+      .about-left, .about-right { padding: 60px 24px; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Marshall Amoranto</div>
+    <div class="links">
+      <a href="#">Work</a>
+      <a href="#">About</a>
+      <a href="#">Process</a>
+      <a href="#" class="cta">Let's talk</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Creative Director & Designer — Los Angeles</div>
+      <h1 class="hero-name">Marshall<br>Amoranto</h1>
+      <p class="hero-tagline">Brand identities, motion design, and digital experiences built with intention.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">See my work</a>
+        <a href="#" class="btn-secondary">About me</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-pill">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Years of experience</div>
+      </div>
+      <div class="stat-pill" style="margin-left: 32px;">
+        <div class="stat-num">60+</div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num">LA</div>
+        <div class="stat-label">Based in Los Angeles</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>Brand Identity</span><span class="dot">✦</span>
+      <span>Motion Design</span><span class="dot">✦</span>
+      <span>Web Design</span><span class="dot">✦</span>
+      <span>Art Direction</span><span class="dot">✦</span>
+      <span>Visual Systems</span><span class="dot">✦</span>
+      <span>Campaign Design</span><span class="dot">✦</span>
+      <span>Brand Identity</span><span class="dot">✦</span>
+      <span>Motion Design</span><span class="dot">✦</span>
+      <span>Web Design</span><span class="dot">✦</span>
+      <span>Art Direction</span><span class="dot">✦</span>
+      <span>Visual Systems</span><span class="dot">✦</span>
+      <span>Campaign Design</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <section class="work-section">
+    <div class="section-header">
+      <h2 class="section-title">Selected Work</h2>
+      <a href="#" class="section-link">View all →</a>
+    </div>
+    <div class="work-grid">
+
+      <div class="work-card">
+        <div class="work-card-img" style="background: linear-gradient(135deg, var(--espresso), var(--rust));">
+          <span style="color: var(--gold);">LZ Studio</span>
+        </div>
+        <div class="work-card-meta">
+          <div class="work-card-title">LZ Studio</div>
+          <div class="work-card-tag">Brand Identity</div>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-card-img" style="background: linear-gradient(135deg, var(--forest), var(--gold));">
+          <span style="color: var(--cream);">JD Creative</span>
+        </div>
+        <div class="work-card-meta">
+          <div class="work-card-title">JD Creative</div>
+          <div class="work-card-tag">Web Design</div>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-card-img" style="background: linear-gradient(135deg, var(--gold), var(--rust-light));">
+          <span style="color: var(--espresso);">BD Agency</span>
+        </div>
+        <div class="work-card-meta">
+          <div class="work-card-title">BD Agency</div>
+          <div class="work-card-tag">Art Direction</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section">
+    <div class="about-left">
+      <h2>Design that<br>means something.</h2>
+      <p>I'm a Los Angeles-based creative director with a deep love for brand storytelling, motion, and the kind of work that feels human — even on a screen.</p>
+      <a href="#">Read my story →</a>
+    </div>
+    <div class="about-right">
+      <div class="service-item">
+        <div class="service-name">Brand Identity</div>
+        <div class="service-desc">Logos, systems, guidelines — everything a brand needs to feel like itself.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">Motion & Animation</div>
+        <div class="service-desc">Bringing brands to life with purposeful movement and storytelling.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">Web Design</div>
+        <div class="service-desc">Digital experiences that convert — and feel like they were made with care.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">Art Direction</div>
+        <div class="service-desc">Campaign concepting, visual language, photo/video direction.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section">
+    <h2>Let's make<br>something great.</h2>
+    <p>Open to new projects, collaborations, and good conversations.</p>
+    <a href="mailto:hello@marshallamoranto.com" class="contact-btn">Get in touch</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo">Marshall Amoranto</div>
+    <div class="copy">© 2026 Marshall Amoranto. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
