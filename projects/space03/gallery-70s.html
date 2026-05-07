@@ -767,7 +767,41 @@
     }
     .gallery-empty.show { display: block; }
 
+    /* ===== BUTTONS (about section) ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--rust);
+      color: var(--cream);
+      padding: 13px 28px;
+      box-shadow: 0 4px 16px rgba(196,88,59,0.35);
+    }
+    .btn-primary:hover { background: var(--gold); color: var(--espresso); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      padding: 12px 26px;
+      border: 1.5px solid rgba(242,232,217,0.35);
+    }
+    .btn-ghost:hover { background: rgba(242,232,217,0.1); border-color: var(--cream); }
+
     /* ===== ABOUT SECTION ===== */
+    .about-wrap {
+      background: var(--forest);
+      width: 100%;
+    }
+
     .about-section {
       max-width: 620px;
       margin: 0 auto;
@@ -798,22 +832,19 @@
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--gold);
       margin-bottom: 16px;
     }
     .about-title {
       font-family: var(--font-display);
       font-size: clamp(1.8rem, 5vw, 3rem);
       line-height: 1.05;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--cream);
       margin-bottom: 20px;
     }
     .about-bio {
       font-size: 15px;
-      color: var(--ink-muted);
+      color: rgba(242,232,217,0.7);
       line-height: 1.8;
     }
     .about-actions {
@@ -825,8 +856,8 @@
     }
 
     .about-contact {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(232,184,109,0.2);
       border-radius: var(--radius-lg);
       padding: 28px;
       display: flex;
@@ -843,19 +874,20 @@
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--ink-faint);
+      color: var(--gold);
+      opacity: 0.6;
     }
     .contact-value {
       font-size: 15px;
       font-weight: 500;
-      color: var(--ink);
+      color: var(--cream);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .contact-value:hover { color: var(--accent); }
+    .contact-value:hover { color: var(--gold); }
     .contact-divider {
       height: 1px;
-      background: var(--border);
+      background: rgba(232,184,109,0.15);
     }
 
     /* ===== FOOTER ===== */
@@ -1064,6 +1096,7 @@
 
 
   <!-- ===== ABOUT ===== -->
+  <div class="about-wrap">
   <section class="about-section" id="about">
 
     <!-- Bio -->
@@ -1104,6 +1137,7 @@
     </div>
 
   </section>
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <footer>
