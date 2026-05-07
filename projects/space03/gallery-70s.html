@@ -72,6 +72,201 @@
     /* ===== THEME TOGGLE ===== */
     /* theme toggle removed — light mode only */
 
+    /* ===== FEATURED HERO ===== */
+    .featured-hero {
+      position: relative;
+      width: 100%;
+      height: 90vh;
+      min-height: 520px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    /* Background image */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: scale(1.04);
+      transition: transform 8s ease;
+    }
+    .featured-hero:hover .hero-bg {
+      transform: scale(1.08);
+    }
+
+    /* Multi-layer overlay: warm 70s tones */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top,  rgba(28,16,7,0.92)  0%,  rgba(28,16,7,0.45) 45%, transparent 75%),
+        linear-gradient(to right, rgba(43,74,63,0.25) 0%, transparent 60%);
+    }
+
+    /* Top label */
+    .hero-label {
+      position: absolute;
+      top: 28px;
+      left: 36px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.85;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--gold);
+      opacity: 0.7;
+    }
+
+    /* Bottom content block */
+    .hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 48px 36px 44px;
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hero-text { flex: 1; min-width: 240px; }
+
+    .hero-category {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(232,184,109,0.15);
+      border: 1px solid rgba(232,184,109,0.3);
+      border-radius: var(--radius-pill);
+      padding: 5px 14px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      color: var(--cream);
+      line-height: 1.0;
+      margin-bottom: 14px;
+      text-shadow: 0 2px 24px rgba(28,16,7,0.5);
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: rgba(242,232,217,0.7);
+      max-width: 480px;
+      line-height: 1.65;
+    }
+
+    .hero-cta {
+      flex-shrink: 0;
+      align-self: flex-end;
+      margin-bottom: 4px;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--espresso);
+      background: var(--gold);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 14px 28px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(232,184,109,0.4);
+      white-space: nowrap;
+    }
+    .hero-btn:hover {
+      background: var(--cream);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(232,184,109,0.35);
+    }
+    .hero-btn-arrow {
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+    .hero-btn:hover .hero-btn-arrow { transform: translateX(3px); }
+
+    /* Scroll hint */
+    .hero-scroll {
+      position: absolute;
+      bottom: 20px;
+      right: 36px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(242,232,217,0.35);
+      writing-mode: vertical-rl;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 36px;
+      background: rgba(242,232,217,0.25);
+    }
+
+    /* Dots for random project indicator */
+    .hero-indicators {
+      position: absolute;
+      bottom: 28px;
+      left: 36px;
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+    .hero-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(242,232,217,0.25);
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+      border: none;
+      padding: 0;
+    }
+    .hero-dot.active {
+      background: var(--gold);
+      transform: scale(1.4);
+    }
+
+    /* Entrance animation */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content { animation: heroFadeUp 0.8s ease 0.2s both; }
+    .hero-label   { animation: heroFadeUp 0.6s ease 0.1s both; }
+
     /* ===== PAGE HEADER ===== */
     .page-header {
       text-align: center;
@@ -630,6 +825,30 @@
 </head>
 <body>
 
+  <!-- ===== FEATURED HERO ===== -->
+  <div class="featured-hero" id="featured-hero" onclick="heroClick()">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-label">Featured Work</div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-category" id="hero-category"></div>
+        <h2 class="hero-title" id="hero-title"></h2>
+        <p class="hero-desc" id="hero-desc"></p>
+      </div>
+      <div class="hero-cta">
+        <button class="hero-btn" onclick="event.stopPropagation(); heroClick()">
+          View Project <span class="hero-btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-indicators" id="hero-indicators"></div>
+    <div class="hero-scroll">Scroll</div>
+  </div>
+
   <!-- PAGE HEADER -->
   <div class="page-header">
     <p class="page-eyebrow">Portfolio — Marshall Amoranto</p>
@@ -847,6 +1066,81 @@
   <script>
     /* Footer year */
     document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    /* =============================================
+       FEATURED HERO
+    ============================================= */
+    const heroProjects = [
+      {
+        title:    'LegalZoom',
+        category: 'Email Campaign',
+        desc:     'A full suite of marketing emails — promotions, onboarding, and transactional design built for one of the web\'s biggest legal brands.',
+        img:      'https://www.space3001.com/popups/images/LZ6b.jpg',
+        cardIndex: 0
+      },
+      {
+        title:    'Joe Digital',
+        category: 'Digital Advertising',
+        desc:     'Display, social, and campaign assets spanning multiple clients and platforms — built for speed, impact, and on-brand consistency.',
+        img:      'https://www.space3001.com/popups/images/JD1.jpg',
+        cardIndex: 1
+      },
+      {
+        title:    'Booz Digital',
+        category: 'Presentation Design',
+        desc:     'Polished pitch decks and visual strategy frameworks used in high-stakes client presentations and internal leadership sessions.',
+        img:      'https://www.space3001.com/popups/images/BD1a.jpg',
+        cardIndex: 2
+      },
+      {
+        title:    'The Daily',
+        category: 'Production Design',
+        desc:     'Editorial layout and UI production for Rupert Murdoch\'s iPad-native newspaper — one of the first publications built exclusively for tablet.',
+        img:      'https://www.space3001.com/popups/images/Ipad_UI_1.png',
+        cardIndex: 3
+      },
+      {
+        title:    'Thoughthorse',
+        category: 'Web Design',
+        desc:     'Front-end web production translating creative direction into clean, functional pages and interactive components.',
+        img:      'https://www.space3001.com/popups/images/webdesign1a_updated.jpg',
+        cardIndex: 4
+      }
+    ];
+
+    let heroIndex = Math.floor(Math.random() * heroProjects.length);
+
+    function renderHero(idx) {
+      const p = heroProjects[idx];
+      document.getElementById('hero-bg').style.backgroundImage = `url('${p.img}')`;
+      document.getElementById('hero-category').textContent = p.category;
+      document.getElementById('hero-title').textContent    = p.title;
+      document.getElementById('hero-desc').textContent     = p.desc;
+
+      // Dots
+      const dotsEl = document.getElementById('hero-indicators');
+      dotsEl.innerHTML = '';
+      heroProjects.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'hero-dot' + (i === idx ? ' active' : '');
+        d.setAttribute('aria-label', `Feature project ${i + 1}`);
+        d.addEventListener('click', e => {
+          e.stopPropagation();
+          heroIndex = i;
+          renderHero(i);
+        });
+        dotsEl.appendChild(d);
+      });
+    }
+
+    function heroClick() {
+      updateFilteredList();
+      const allCards = Array.from(document.querySelectorAll('.gallery-card'));
+      openLightbox(heroProjects[heroIndex].cardIndex, 0);
+    }
+
+    // Kick off
+    renderHero(heroIndex);
 
     /* light mode only — toggle removed */
 
