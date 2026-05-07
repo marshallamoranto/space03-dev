@@ -243,7 +243,7 @@
     .ct-5 { background: linear-gradient(135deg, rgba(196,88,59,0.25), rgba(232,184,109,0.18)); }
     .ct-6 { background: linear-gradient(135deg, rgba(43,74,63,0.25), rgba(196,88,59,0.22)); }
 
-    .card-body { padding: 18px 20px 22px; }
+    .card-body { padding: 18px 20px 22px; text-align: center; }
     .card-tag {
       font-size: 9px;
       font-weight: 700;
@@ -537,17 +537,17 @@
 
     /* ===== ABOUT SECTION ===== */
     .about-section {
-      max-width: 800px;
+      max-width: 620px;
       margin: 0 auto;
       padding: 80px 24px 100px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 40px;
     }
-    @media (max-width: 640px) {
-      .about-section { grid-template-columns: 1fr; gap: 32px; }
-    }
+
+    .about-bio-col { width: 100%; }
 
     .about-eyebrow {
       font-size: 11px;
@@ -575,6 +575,7 @@
     .about-actions {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 12px;
       margin-top: 28px;
     }
@@ -618,10 +619,10 @@
       border-top: 1px solid var(--border);
       padding: 28px 24px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
+      text-align: center;
+      gap: 8px;
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -783,8 +784,8 @@
   <!-- ===== ABOUT ===== -->
   <section class="about-section" id="about">
 
-    <!-- Left: Bio -->
-    <div>
+    <!-- Bio -->
+    <div class="about-bio-col">
       <p class="about-eyebrow">About</p>
       <h2 class="about-title">Marshall Amoranto</h2>
       <p class="about-bio">
@@ -797,8 +798,8 @@
       </div>
     </div>
 
-    <!-- Right: Contact details -->
-    <div class="about-contact">
+    <!-- Contact details -->
+    <div class="about-contact" style="width:100%; max-width:360px; text-align:left;">
       <div class="contact-item">
         <span class="contact-label">Email</span>
         <a href="mailto:YOUR_EMAIL" class="contact-value">your@email.com</a>
