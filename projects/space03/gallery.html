@@ -451,6 +451,34 @@
       letter-spacing: 0.06em;
     }
 
+    /* ===== INNER IMAGE NAV (within a project) ===== */
+    .lb-img-nav {
+      position: absolute;
+      bottom: 14px;
+      z-index: 10;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lb-img-nav:hover { background: rgba(255,154,60,0.5); transform: scale(1.1); }
+    .lb-img-nav:disabled { opacity: 0.2; cursor: default; pointer-events: none; }
+    .lb-img-prev { right: 60px; }
+    .lb-img-next { right: 14px; }
+
+    @media (min-width: 640px) {
+      .lb-img-prev { right: 60px; bottom: 20px; }
+      .lb-img-next { right: 14px; bottom: 20px; }
+    }
+
     /* ===== TRANSITIONS ===== */
     .lb-image-wrap.transitioning img,
     .lb-image-wrap.transitioning .lb-placeholder { opacity: 0; }
@@ -626,121 +654,113 @@
   <!-- FILTER BAR -->
   <div class="filter-bar">
     <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="branding">Branding</button>
+    <button class="filter-btn" data-filter="email">Email</button>
+    <button class="filter-btn" data-filter="digital">Digital Ads</button>
+    <button class="filter-btn" data-filter="presentation">Presentation</button>
+    <button class="filter-btn" data-filter="production">Production</button>
     <button class="filter-btn" data-filter="web">Web Design</button>
-    <button class="filter-btn" data-filter="print">Print</button>
-    <button class="filter-btn" data-filter="motion">Motion</button>
   </div>
 
   <!-- GALLERY GRID -->
   <div class="gallery" id="gallery">
 
-    <!--
-      TO ADD YOUR OWN PROJECT:
-      Copy a .gallery-card block below and update:
-        data-category  → branding | web | print | motion
-        data-img       → path or URL to your image (or leave empty for placeholder)
-        data-title     → project title
-        data-tag       → category label
-        data-desc      → description (can include HTML)
-        data-skills    → comma-separated skill tags
-        .card-thumb    → add ct-1 through ct-6 for placeholder gradient color
-        emoji inside   → shown when no image
-    -->
-
+    <!-- LegalZoom -->
     <div class="gallery-card"
-      data-category="branding"
-      data-img=""
-      data-title="Project Title One"
-      data-tag="Branding"
-      data-desc="Full brand identity system including logo design, color system, typography, and brand guidelines. Delivered across print and digital applications."
-      data-skills="Illustrator, Photoshop, InDesign, Branding">
-      <div class="card-thumb ct-1">🎨</div>
+      data-category="email"
+      data-img="https://www.space3001.com/popups/images/LZ6b.jpg"
+      data-images='["https://www.space3001.com/popups/images/LZ6b.jpg","https://www.space3001.com/popups/images/LZ5.jpg","https://www.space3001.com/popups/images/LZ4.jpg","https://www.space3001.com/popups/images/LZ3.jpg","https://www.space3001.com/popups/images/LZ7.jpg","https://www.space3001.com/popups/images/LZ8.jpg","https://www.space3001.com/popups/images/LZ9.jpg"]'
+      data-title="LegalZoom"
+      data-tag="Email Campaign"
+      data-desc="Email campaign design and production for LegalZoom. Designed and built a series of marketing emails covering promotions, onboarding, and transactional communications. 2014–2016."
+      data-skills="Email Design, HTML, CSS, Photoshop, Production">
+      <div class="card-thumb" style="background:linear-gradient(135deg,rgba(255,154,60,0.2),rgba(255,78,138,0.15));">
+        <img src="https://www.space3001.com/popups/images/LZ6b.jpg" alt="LegalZoom" loading="lazy" />
+      </div>
       <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
       <div class="card-body">
-        <div class="card-tag">Branding</div>
-        <div class="card-title">Project Title One</div>
-        <div class="card-desc">Brand identity and visual system.</div>
+        <div class="card-tag">Email Campaign</div>
+        <div class="card-title">LegalZoom</div>
+        <div class="card-desc">Email design &amp; production. 2014–2016.</div>
       </div>
     </div>
 
+    <!-- Joe Digital -->
+    <div class="gallery-card"
+      data-category="digital"
+      data-img="https://www.space3001.com/popups/images/JD1.jpg"
+      data-images='["https://www.space3001.com/popups/images/JD1.jpg","https://www.space3001.com/popups/images/JD2.jpg","https://www.space3001.com/popups/images/JD3.jpg","https://www.space3001.com/popups/images/JD4.jpg","https://www.space3001.com/popups/images/JD5.jpg"]'
+      data-title="Joe Digital"
+      data-tag="Digital Advertising"
+      data-desc="Digital advertising and design work produced at Joe Digital. A range of display, social, and campaign assets built for multiple clients and platforms."
+      data-skills="Photoshop, Illustrator, Digital Ads, Production">
+      <div class="card-thumb" style="background:linear-gradient(135deg,rgba(255,78,138,0.18),rgba(123,47,190,0.2));">
+        <img src="https://www.space3001.com/popups/images/JD1.jpg" alt="Joe Digital" loading="lazy" />
+      </div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Digital Advertising</div>
+        <div class="card-title">Joe Digital</div>
+        <div class="card-desc">Display &amp; campaign design.</div>
+      </div>
+    </div>
+
+    <!-- Booz Digital -->
+    <div class="gallery-card"
+      data-category="presentation"
+      data-img="https://www.space3001.com/popups/images/BD1a.jpg"
+      data-images='["https://www.space3001.com/popups/images/BD1a.jpg","https://www.space3001.com/popups/images/BD1b.jpg","https://www.space3001.com/popups/images/BD1c.jpg","https://www.space3001.com/popups/images/BD1d.jpg"]'
+      data-title="Booz Digital"
+      data-tag="Presentation Design"
+      data-desc="Presentation design for Booz Digital. Developed polished slide decks and visual frameworks used in client-facing pitches and internal strategy sessions. 2013."
+      data-skills="Presentation Design, PowerPoint, InDesign, Photoshop">
+      <div class="card-thumb" style="background:linear-gradient(135deg,rgba(123,47,190,0.18),rgba(255,154,60,0.15));">
+        <img src="https://www.space3001.com/popups/images/BD1a.jpg" alt="Booz Digital" loading="lazy" />
+      </div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Presentation Design</div>
+        <div class="card-title">Booz Digital</div>
+        <div class="card-desc">Pitch &amp; strategy decks. 2013.</div>
+      </div>
+    </div>
+
+    <!-- The Daily -->
+    <div class="gallery-card"
+      data-category="production"
+      data-img="https://www.space3001.com/popups/images/Ipad_UI_1.png"
+      data-images='["https://www.space3001.com/popups/images/Ipad_UI_1.png","https://www.space3001.com/popups/images/Ipad_UI_2.png","https://www.space3001.com/popups/images/Ipad_UI_3.jpg","https://www.space3001.com/popups/images/Ipad_UI_4.png","https://www.space3001.com/popups/images/Ipad_UI_5.png","https://www.space3001.com/popups/images/Ipad_UI_6.png","https://www.space3001.com/popups/images/Ipad_UI_7.png","https://www.space3001.com/popups/images/Ipad_UI_8.png","https://www.space3001.com/popups/images/Ipad_UI_9.png","https://www.space3001.com/popups/images/Ipad_UI_10.png","https://www.space3001.com/popups/images/Ipad_UI_11.png","https://www.space3001.com/popups/images/Ipad_UI_12.png"]'
+      data-title="The Daily"
+      data-tag="Production Design"
+      data-desc="Production design for The Daily, Rupert Murdoch's iPad-native newspaper — one of the first publications built exclusively for tablet. Designed and produced editorial layouts and UI components for the iPad edition. 2011–2013."
+      data-skills="Production Design, iPad UI, Photoshop, Editorial Layout">
+      <div class="card-thumb" style="background:linear-gradient(135deg,rgba(255,154,60,0.18),rgba(123,47,190,0.18));">
+        <img src="https://www.space3001.com/popups/images/Ipad_UI_1.png" alt="The Daily" loading="lazy" />
+      </div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Production Design</div>
+        <div class="card-title">The Daily</div>
+        <div class="card-desc">iPad editorial production. 2011–2013.</div>
+      </div>
+    </div>
+
+    <!-- Thoughthorse / Web Design -->
     <div class="gallery-card"
       data-category="web"
-      data-img=""
-      data-title="Project Title Two"
+      data-img="https://www.space3001.com/popups/images/webdesign1a_updated.jpg"
+      data-images='["https://www.space3001.com/popups/images/webdesign1a_updated.jpg","https://www.space3001.com/popups/images/webdesign2.jpg","https://www.space3001.com/popups/images/webdesign3.jpg"]'
+      data-title="Thoughthorse"
       data-tag="Web Design"
-      data-desc="Responsive website design and front-end build. Focused on clean layout, legible typography, and smooth interaction across all devices."
-      data-skills="HTML, CSS, Figma, Web Design">
-      <div class="card-thumb ct-2">🌐</div>
+      data-desc="Web production design at Thoughthorse. Designed and built web pages and interactive components, translating creative direction into clean, functional front-end code. 2014."
+      data-skills="HTML, CSS, Web Design, Photoshop, Front-End">
+      <div class="card-thumb" style="background:linear-gradient(135deg,rgba(255,78,138,0.2),rgba(255,154,60,0.15));">
+        <img src="https://www.space3001.com/popups/images/webdesign1a_updated.jpg" alt="Thoughthorse" loading="lazy" />
+      </div>
       <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
       <div class="card-body">
         <div class="card-tag">Web Design</div>
-        <div class="card-title">Project Title Two</div>
-        <div class="card-desc">Website design and front-end build.</div>
-      </div>
-    </div>
-
-    <div class="gallery-card"
-      data-category="print"
-      data-img=""
-      data-title="Project Title Three"
-      data-tag="Print"
-      data-desc="Print production package: editorial layout, packaging design, and large-format materials. Prepress-ready files delivered for offset and digital print."
-      data-skills="InDesign, Illustrator, Photoshop, Print">
-      <div class="card-thumb ct-3">🖨️</div>
-      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
-      <div class="card-body">
-        <div class="card-tag">Print</div>
-        <div class="card-title">Project Title Three</div>
-        <div class="card-desc">Print production and editorial layout.</div>
-      </div>
-    </div>
-
-    <div class="gallery-card"
-      data-category="motion"
-      data-img=""
-      data-title="Project Title Four"
-      data-tag="Motion"
-      data-desc="Motion graphics and animated content for social and broadcast. Designed in After Effects, with custom-built frame-by-frame transitions and kinetic type."
-      data-skills="After Effects, Premiere, Motion Graphics">
-      <div class="card-thumb ct-4">✦</div>
-      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
-      <div class="card-body">
-        <div class="card-tag">Motion</div>
-        <div class="card-title">Project Title Four</div>
-        <div class="card-desc">Motion graphics and animated content.</div>
-      </div>
-    </div>
-
-    <div class="gallery-card"
-      data-category="branding"
-      data-img=""
-      data-title="Project Title Five"
-      data-tag="Branding"
-      data-desc="Campaign identity and collateral suite. Brand direction, photography art direction, and final production across OOH, digital, and print formats."
-      data-skills="Illustrator, Photoshop, InDesign, Art Direction">
-      <div class="card-thumb ct-5">🌿</div>
-      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
-      <div class="card-body">
-        <div class="card-tag">Branding</div>
-        <div class="card-title">Project Title Five</div>
-        <div class="card-desc">Campaign identity and collateral.</div>
-      </div>
-    </div>
-
-    <div class="gallery-card"
-      data-category="web"
-      data-img=""
-      data-title="Project Title Six"
-      data-tag="Web Design"
-      data-desc="E-commerce redesign focused on conversion and accessibility. User research, wireframes, visual design, and prototype handoff."
-      data-skills="Figma, HTML, CSS, UX, Web Design">
-      <div class="card-thumb ct-6">💻</div>
-      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
-      <div class="card-body">
-        <div class="card-tag">Web Design</div>
-        <div class="card-title">Project Title Six</div>
-        <div class="card-desc">E-commerce redesign and UX.</div>
+        <div class="card-title">Thoughthorse</div>
+        <div class="card-desc">Web production &amp; front-end. 2014.</div>
       </div>
     </div>
 
@@ -886,15 +906,17 @@
 
     /* =============================================
        LIGHTBOX STATE
+       - projectIndex: which card/project is open
+       - imageIndex:   which image within that project
     ============================================= */
-    let allProjects = [];    // all cards (in DOM order)
-    let filteredProjects = []; // currently visible ones
-    let currentIndex = 0;
+    let allProjects    = [];
+    let filteredProjects = [];
+    let projectIndex   = 0;
+    let imageIndex     = 0;
 
     function buildProjectList() {
       allProjects = Array.from(document.querySelectorAll('.gallery-card'));
     }
-
     function updateFilteredList() {
       filteredProjects = allProjects.filter(c => c.style.display !== 'none');
     }
@@ -908,18 +930,18 @@
         updateFilteredList();
         const idx = filteredProjects.indexOf(card);
         if (idx === -1) return;
-        openLightbox(idx);
+        openLightbox(idx, 0);
       });
     });
 
     /* =============================================
        OPEN / CLOSE
     ============================================= */
-    function openLightbox(idx) {
-      currentIndex = idx;
-      renderLightbox();
-      const lb = document.getElementById('lightbox');
-      lb.classList.add('open');
+    function openLightbox(pIdx, iIdx) {
+      projectIndex = pIdx;
+      imageIndex   = iIdx || 0;
+      renderLightbox(false);
+      document.getElementById('lightbox').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
@@ -930,42 +952,54 @@
 
     /* =============================================
        NAVIGATE
+       navigate(dir) moves between PROJECTS (prev/next card)
+       navigateImage(dir) moves between IMAGES within a project
     ============================================= */
     function navigate(dir) {
-      const next = currentIndex + dir;
+      const next = projectIndex + dir;
       if (next < 0 || next >= filteredProjects.length) return;
-      currentIndex = next;
+      projectIndex = next;
+      imageIndex   = 0;
+      transition();
+    }
 
-      // Transition animation
+    function navigateImage(dir) {
+      const card   = filteredProjects[projectIndex];
+      const images = getImages(card);
+      const next   = imageIndex + dir;
+      if (next < 0 || next >= images.length) return;
+      imageIndex = next;
+      transition();
+    }
+
+    function transition() {
       const wrap = document.getElementById('lb-image-wrap');
       wrap.classList.add('transitioning');
       setTimeout(() => {
-        renderLightbox();
+        renderLightbox(true);
         wrap.classList.remove('transitioning');
       }, 200);
+    }
+
+    function getImages(card) {
+      try {
+        return JSON.parse(card.dataset.images || '[]');
+      } catch(e) {
+        return card.dataset.img ? [card.dataset.img] : [];
+      }
     }
 
     /* =============================================
        RENDER
     ============================================= */
-    function renderLightbox() {
-      const card = filteredProjects[currentIndex];
-      const total = filteredProjects.length;
+    function renderLightbox(keepInfo) {
+      const card    = filteredProjects[projectIndex];
+      const images  = getImages(card);
+      const imgUrl  = images[imageIndex] || '';
+      const total   = filteredProjects.length;
+      const imgTotal = images.length;
 
-      const img     = card.dataset.img   || '';
-      const title   = card.dataset.title || '';
-      const tag     = card.dataset.tag   || '';
-      const desc    = card.dataset.desc  || '';
-      const skills  = card.dataset.skills ? card.dataset.skills.split(',').map(s => s.trim()) : [];
-      // Emoji from the card thumb (for placeholder)
-      const emoji   = card.querySelector('.card-thumb') && !card.querySelector('.card-thumb img')
-                        ? (card.querySelector('.card-thumb').textContent.trim() || '✦')
-                        : '✦';
-      // Placeholder bg class
-      const thumbEl = card.querySelector('.card-thumb');
-      const ctClass = thumbEl ? Array.from(thumbEl.classList).find(c => c.startsWith('ct-')) || 'ct-1' : 'ct-1';
-
-      // Inject image area
+      // ---- IMAGE AREA ----
       const wrap = document.getElementById('lb-image-wrap');
       const existingMedia = wrap.querySelector('.lb-media');
       if (existingMedia) existingMedia.remove();
@@ -974,77 +1008,139 @@
       media.className = 'lb-media';
       media.style.cssText = 'width:100%;height:100%;';
 
-      if (img) {
+      if (imgUrl) {
         const i = document.createElement('img');
-        i.src = img;
-        i.alt = title;
+        i.src = imgUrl;
+        i.alt = card.dataset.title || '';
         media.appendChild(i);
       } else {
         const ph = document.createElement('div');
-        ph.className = `lb-placeholder ${ctClass}`;
-        ph.textContent = emoji;
+        ph.className = 'lb-placeholder ct-1';
+        ph.textContent = '✦';
         media.appendChild(ph);
       }
-
-      // Insert before the counter (first child)
       wrap.insertBefore(media, wrap.querySelector('.lb-counter'));
 
-      // Counter
-      document.getElementById('lb-counter').textContent = `${currentIndex + 1} / ${total}`;
+      // ---- PROJECT COUNTER (top-left) ----
+      document.getElementById('lb-counter').textContent = `${projectIndex + 1} / ${total}`;
 
-      // Nav buttons
-      document.getElementById('lb-prev').disabled = currentIndex === 0;
-      document.getElementById('lb-next').disabled = currentIndex === total - 1;
+      // ---- PROJECT NAV (prev/next project) ----
+      document.getElementById('lb-prev').disabled = projectIndex === 0;
+      document.getElementById('lb-next').disabled = projectIndex === total - 1;
 
-      // Dots
+      // ---- IMAGE DOTS (within project) ----
       const dotsEl = document.getElementById('lb-dots');
       dotsEl.innerHTML = '';
-      filteredProjects.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.className = 'lb-dot' + (i === currentIndex ? ' active' : '');
-        dot.addEventListener('click', (e) => { e.stopPropagation(); navigate(i - currentIndex); });
-        dotsEl.appendChild(dot);
-      });
+      if (imgTotal > 1) {
+        images.forEach((_, i) => {
+          const dot = document.createElement('div');
+          dot.className = 'lb-dot' + (i === imageIndex ? ' active' : '');
+          dot.addEventListener('click', e => { e.stopPropagation(); navigateImage(i - imageIndex); });
+          dotsEl.appendChild(dot);
+        });
+      }
 
-      // Info
-      document.getElementById('lb-tag').textContent   = tag;
-      document.getElementById('lb-title').textContent = title;
-      document.getElementById('lb-desc').innerHTML    = desc;
+      // ---- IMAGE ARROWS (within-project, shown only if >1 image) ----
+      let imgPrev = document.getElementById('lb-img-prev');
+      let imgNext = document.getElementById('lb-img-next');
 
-      const skillsEl = document.getElementById('lb-skills');
-      skillsEl.innerHTML = '';
-      skills.forEach(s => {
-        const sp = document.createElement('span');
-        sp.className = 'lb-skill-tag';
-        sp.textContent = s;
-        skillsEl.appendChild(sp);
-      });
+      // Create inner image nav arrows if not already present
+      if (!imgPrev) {
+        imgPrev = document.createElement('button');
+        imgPrev.id = 'lb-img-prev';
+        imgPrev.className = 'lb-img-nav lb-img-prev';
+        imgPrev.setAttribute('aria-label', 'Previous image');
+        imgPrev.innerHTML = '‹';
+        imgPrev.addEventListener('click', e => { e.stopPropagation(); navigateImage(-1); });
+        wrap.appendChild(imgPrev);
+      }
+      if (!imgNext) {
+        imgNext = document.createElement('button');
+        imgNext.id = 'lb-img-next';
+        imgNext.className = 'lb-img-nav lb-img-next';
+        imgNext.setAttribute('aria-label', 'Next image');
+        imgNext.innerHTML = '›';
+        imgNext.addEventListener('click', e => { e.stopPropagation(); navigateImage(1); });
+        wrap.appendChild(imgNext);
+      }
 
-      // Desktop: show vertical gradient bar
-      const isDesktop = window.innerWidth >= 640;
-      const bar = document.getElementById('lb-right-bar');
-      bar.style.display = isDesktop ? 'block' : 'none';
+      const showImgNav = imgTotal > 1;
+      imgPrev.style.display = showImgNav ? 'flex' : 'none';
+      imgNext.style.display = showImgNav ? 'flex' : 'none';
+      imgPrev.disabled = imageIndex === 0;
+      imgNext.disabled = imageIndex === imgTotal - 1;
+
+      // ---- IMAGE COUNTER inside info panel ----
+      let imgCountEl = document.getElementById('lb-img-count');
+      if (!imgCountEl) {
+        imgCountEl = document.createElement('div');
+        imgCountEl.id = 'lb-img-count';
+        imgCountEl.style.cssText = 'font-size:11px;color:var(--ink-faint);margin-top:14px;letter-spacing:0.06em;';
+        document.getElementById('lb-skills').after(imgCountEl);
+      }
+      imgCountEl.textContent = imgTotal > 1 ? `Image ${imageIndex + 1} of ${imgTotal}` : '';
+
+      // ---- INFO (only swap on project change) ----
+      if (!keepInfo) {
+        const title  = card.dataset.title  || '';
+        const tag    = card.dataset.tag    || '';
+        const desc   = card.dataset.desc   || '';
+        const skills = card.dataset.skills ? card.dataset.skills.split(',').map(s => s.trim()) : [];
+
+        document.getElementById('lb-tag').textContent   = tag;
+        document.getElementById('lb-title').textContent = title;
+        document.getElementById('lb-desc').innerHTML    = desc;
+
+        const skillsEl = document.getElementById('lb-skills');
+        skillsEl.innerHTML = '';
+        skills.forEach(s => {
+          const sp = document.createElement('span');
+          sp.className = 'lb-skill-tag';
+          sp.textContent = s;
+          skillsEl.appendChild(sp);
+        });
+      }
+
+      // Desktop vertical gradient bar
+      document.getElementById('lb-right-bar').style.display =
+        window.innerWidth >= 640 ? 'block' : 'none';
     }
 
     /* =============================================
        KEYBOARD NAVIGATION
+       ← / → = move between images within project
+       Shift+← / Shift+→ = move between projects
     ============================================= */
     document.addEventListener('keydown', e => {
       if (!document.getElementById('lightbox').classList.contains('open')) return;
-      if (e.key === 'Escape')      closeLightbox();
-      if (e.key === 'ArrowLeft')   navigate(-1);
-      if (e.key === 'ArrowRight')  navigate(1);
+      if (e.key === 'Escape') { closeLightbox(); return; }
+      if (e.shiftKey) {
+        if (e.key === 'ArrowLeft')  navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
+      } else {
+        if (e.key === 'ArrowLeft')  navigateImage(-1);
+        if (e.key === 'ArrowRight') navigateImage(1);
+      }
     });
 
     /* =============================================
        TOUCH / SWIPE
+       Swipe on image area = next/prev image
+       Swipe on info area = next/prev project
     ============================================= */
     let touchStartX = 0;
+    let touchTarget = null;
     const panel = document.querySelector('.lb-panel');
-    panel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    panel.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchTarget = e.target.closest('.lb-image-wrap') ? 'image' : 'info';
+    }, { passive: true });
     panel.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 50) navigate(dx < 0 ? 1 : -1);
+      if (Math.abs(dx) > 50) {
+        if (touchTarget === 'image') navigateImage(dx < 0 ? 1 : -1);
+        else navigate(dx < 0 ? 1 : -1);
+      }
     });
 
   </script>
