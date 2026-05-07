@@ -497,6 +497,115 @@
     }
     .gallery-empty.show { display: block; }
 
+    /* ===== ABOUT SECTION ===== */
+    .about-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 24px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 640px) {
+      .about-section { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .about-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 16px;
+    }
+    .about-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      line-height: 1.05;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    .about-bio {
+      font-size: 15px;
+      color: var(--ink-muted);
+      line-height: 1.8;
+    }
+    .about-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .about-contact {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .contact-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .contact-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-value:hover { color: var(--rose); }
+    .contact-divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+    .footer-copy a {
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-copy a:hover { color: var(--rose); }
+
   </style>
 </head>
 <body>
@@ -641,6 +750,58 @@
   </div>
 
 
+  <!-- ===== ABOUT ===== -->
+  <section class="about-section" id="about">
+
+    <!-- Left: Bio -->
+    <div>
+      <p class="about-eyebrow">About</p>
+      <h2 class="about-title">Marshall Amoranto</h2>
+      <p class="about-bio">
+        <!-- Replace this with your own bio -->
+        Graphic and production designer based in Los Angeles. Passionate about nature, sustainability, and design that actually means something — for people and the planet.
+      </p>
+      <div class="about-actions">
+        <a href="YOUR_RESUME_URL" target="_blank" class="btn btn-primary">Download Resume</a>
+        <a href="mailto:YOUR_EMAIL" class="btn btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+
+    <!-- Right: Contact details -->
+    <div class="about-contact">
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <a href="mailto:YOUR_EMAIL" class="contact-value">your@email.com</a>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-item">
+        <span class="contact-label">Resume</span>
+        <a href="YOUR_RESUME_URL" target="_blank" class="contact-value">Download PDF →</a>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-item">
+        <span class="contact-label">Location</span>
+        <span class="contact-value">Los Angeles, CA</span>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-item">
+        <span class="contact-label">Available for</span>
+        <span class="contact-value">Freelance &amp; Full-time</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="site-footer">
+      <span class="footer-name">space03</span>
+      <span class="footer-copy">
+        &copy; <span id="footer-year"></span> Marshall Amoranto. All rights reserved.
+      </span>
+    </div>
+  </footer>
+
   <!-- ===== LIGHTBOX ===== -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project Detail">
 
@@ -678,6 +839,9 @@
 
 
   <script>
+    /* Footer year */
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
     /* =============================================
        THEME TOGGLE
     ============================================= */
