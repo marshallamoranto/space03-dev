@@ -72,6 +72,68 @@
     /* ===== THEME TOGGLE ===== */
     /* theme toggle removed — light mode only */
 
+    /* ===== SITE NAV ===== */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      width: 100%;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px;
+      height: 60px;
+      box-shadow: 0 2px 12px rgba(28,16,7,0.06);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--espresso);
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .nav-link:hover {
+      color: var(--espresso);
+      background: var(--bg-2);
+    }
+
+    .nav-link-cta {
+      background: var(--rust);
+      color: var(--cream) !important;
+      padding: 7px 18px;
+      box-shadow: 0 2px 10px rgba(196,88,59,0.25);
+    }
+    .nav-link-cta:hover {
+      background: var(--espresso) !important;
+      box-shadow: 0 4px 16px rgba(28,16,7,0.2);
+    }
+
+    @media (max-width: 480px) {
+      .site-nav { padding: 0 20px; }
+      .nav-link { padding: 6px 10px; font-size: 12px; }
+    }
+
     /* ===== FEATURED HERO ===== */
     .featured-hero {
       position: relative;
@@ -115,20 +177,25 @@
       font-weight: 700;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.85;
+      color: var(--espresso);
       z-index: 2;
       display: flex;
       align-items: center;
       gap: 10px;
+    }
+    .hero-label-text {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
     }
     .hero-label::before {
       content: '';
       display: inline-block;
       width: 28px;
       height: 1.5px;
-      background: var(--gold);
-      opacity: 0.7;
+      background: rgba(28,16,7,0.4);
     }
 
     /* Bottom content block */
@@ -826,12 +893,23 @@
 </head>
 <body>
 
+  <!-- ===== SITE NAV ===== -->
+  <nav class="site-nav">
+    <a href="#" class="nav-logo">space03</a>
+    <div class="nav-links">
+      <a href="#gallery" class="nav-link">Work</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="mailto:YOUR_EMAIL" class="nav-link">Contact</a>
+      <a href="YOUR_RESUME_URL" target="_blank" class="nav-link nav-link-cta">Resume</a>
+    </div>
+  </nav>
+
   <!-- ===== FEATURED HERO ===== -->
   <div class="featured-hero" id="featured-hero" onclick="heroClick()">
     <div class="hero-bg" id="hero-bg"></div>
     <div class="hero-overlay"></div>
 
-    <div class="hero-label">Featured Work</div>
+    <div class="hero-label"><span class="hero-label-text">Featured Work</span></div>
 
     <div class="hero-content">
       <div class="hero-text">
@@ -868,7 +946,7 @@
   </div>
 
   <!-- GALLERY GRID -->
-  <div class="gallery" id="gallery">
+  <div class="gallery" id="gallery" style="scroll-margin-top:70px">
 
     <!-- LegalZoom -->
     <div class="gallery-card"
