@@ -158,14 +158,26 @@
       transform: scale(1.08);
     }
 
-    /* Multi-layer overlay: warm 70s tones + white wash */
+    /* White wash layer */
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background:
-        rgba(255,255,255,0.30),
-        linear-gradient(to top,  rgba(28,16,7,0.92)  0%,  rgba(28,16,7,0.45) 45%, transparent 75%),
-        linear-gradient(to right, rgba(43,74,63,0.25) 0%, transparent 60%);
+      background: rgba(255,255,255,0.30);
+    }
+
+    /* Dark bottom gradient — sits above white wash for readability */
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(28,16,7,0.96) 0%,
+        rgba(28,16,7,0.7)  30%,
+        rgba(28,16,7,0.2)  58%,
+        transparent        78%
+      );
+      pointer-events: none;
+      z-index: 1;
     }
 
     /* Top label */
@@ -851,9 +863,12 @@
     }
 
     /* ===== FOOTER ===== */
-    .site-footer {
+    footer {
       border-top: 1px solid var(--border);
-      padding: 28px 24px;
+      width: 100%;
+    }
+    .site-footer {
+      padding: 28px 36px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -908,6 +923,7 @@
   <div class="featured-hero" id="featured-hero" onclick="heroClick()">
     <div class="hero-bg" id="hero-bg"></div>
     <div class="hero-overlay"></div>
+    <div class="hero-gradient"></div>
 
     <div class="hero-label"><span class="hero-label-text">Featured Work</span></div>
 
