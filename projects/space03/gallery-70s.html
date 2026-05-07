@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>space03 — Portfolio Gallery (70s Record)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       SPACE03 — PORTFOLIO GALLERY + LIGHTBOX
+       Font: Permanent Marker + DM Sans
+       Palette: 70s Record
+    ============================================= */
+
+    :root {
+      /* 70s Record palette */
+      --cream:       #F2E8D9;
+      --gold:        #E8B86D;
+      --rust:        #C4583B;
+      --forest:      #2B4A3F;
+      --espresso:    #1C1007;
+      --sage:        #A8C5A0;
+
+      --grad:        linear-gradient(135deg, #E8B86D 0%, #C4583B 60%, #2B4A3F 100%);
+      --grad-soft:   linear-gradient(135deg, rgba(232,184,109,0.18) 0%, rgba(196,88,59,0.12) 60%, rgba(43,74,63,0.1) 100%);
+
+      --font-display: 'Permanent Marker', cursive;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --radius-sm:   6px;
+      --radius-md:   14px;
+      --radius-lg:   20px;
+      --radius-xl:   32px;
+      --radius-pill: 999px;
+
+      --shadow-sm:   0 2px 12px rgba(28,16,7,0.1);
+      --shadow-md:   0 8px 32px rgba(28,16,7,0.18);
+      --shadow-lg:   0 24px 64px rgba(28,16,7,0.35);
+    }
+
+    /* Single theme: Dark Espresso + Gold */
+    [data-theme="dark"], :root {
+      --bg:          #1C1007;
+      --bg-2:        #261508;
+      --surface:     #2E1A0C;
+      --surface-2:   #3A2210;
+      --border:      rgba(232,184,109,0.12);
+      --ink:         #F2E8D9;
+      --ink-muted:   #A0876A;
+      --ink-faint:   #4A3020;
+      --accent:      #E8B86D;
+      --accent-2:    #C4583B;
+      --accent-3:    #2B4A3F;
+    }
+
+    [data-theme="light"] {
+      --bg:          #F2E8D9;
+      --bg-2:        #EDE0CC;
+      --surface:     #FBF5EC;
+      --surface-2:   #EDE0CC;
+      --border:      rgba(28,16,7,0.1);
+      --ink:         #1C1007;
+      --ink-muted:   #7A5C40;
+      --ink-faint:   #C8B49A;
+      --accent:      #C4583B;
+      --accent-2:    #E8B86D;
+      --accent-3:    #2B4A3F;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ===== THEME TOGGLE ===== */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 8px 16px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      box-shadow: var(--shadow-md);
+      transition: all 0.2s;
+    }
+    .theme-toggle:hover { color: var(--ink); }
+    .toggle-dot {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--grad);
+      flex-shrink: 0;
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      text-align: center;
+      padding: 80px 24px 48px;
+    }
+    .page-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 7vw, 4.5rem);
+      line-height: 1.0;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .page-sub {
+      font-size: 1rem;
+      color: var(--ink-muted);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* ===== FILTER TABS ===== */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0 24px 48px;
+    }
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 8px 20px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      color: var(--ink);
+      border-color: var(--accent);
+    }
+    .filter-btn.active {
+      background: var(--grad);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(196,88,59,0.3);
+    }
+
+    /* ===== GALLERY GRID ===== */
+    .gallery {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* ===== GALLERY CARD ===== */
+    .gallery-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .gallery-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Hover overlay */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--grad);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-overlay-icon {
+      font-size: 2rem;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.25s ease 0.05s, transform 0.25s ease 0.05s;
+      color: #fff;
+    }
+    .gallery-card:hover .card-overlay { opacity: 0.15; }
+    .gallery-card:hover .card-overlay-icon { opacity: 1; transform: scale(1); }
+
+    /* Thumbnail area */
+    .card-thumb {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Placeholder gradient thumbs (used when no img) */
+    .ct-1 { background: linear-gradient(135deg, rgba(232,184,109,0.3), rgba(196,88,59,0.22)); }
+    .ct-2 { background: linear-gradient(135deg, rgba(196,88,59,0.22), rgba(43,74,63,0.25)); }
+    .ct-3 { background: linear-gradient(135deg, rgba(43,74,63,0.22), rgba(232,184,109,0.18)); }
+    .ct-4 { background: linear-gradient(135deg, rgba(232,184,109,0.22), rgba(43,74,63,0.25)); }
+    .ct-5 { background: linear-gradient(135deg, rgba(196,88,59,0.25), rgba(232,184,109,0.18)); }
+    .ct-6 { background: linear-gradient(135deg, rgba(43,74,63,0.25), rgba(196,88,59,0.22)); }
+
+    .card-body { padding: 18px 20px 22px; }
+    .card-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+
+    /* Backdrop */
+    .lb-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 5, 20, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Panel */
+    .lb-panel {
+      position: relative;
+      z-index: 1;
+      width: min(92vw, 900px);
+      max-height: 90vh;
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+
+      /* Entry animation */
+      animation: lbIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(0.92) translateY(16px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Image area */
+    .lb-image-wrap {
+      flex-shrink: 0;
+      height: min(50vh, 460px);
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+    .lb-image-wrap img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.25s;
+    }
+    /* Placeholder (no img) */
+    .lb-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    /* Gradient bar under image */
+    .lb-grad-bar {
+      height: 3px;
+      background: var(--grad);
+      flex-shrink: 0;
+    }
+
+    /* Info area */
+    .lb-info {
+      padding: 28px 32px 32px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .lb-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .lb-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      line-height: 1.05;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+    }
+    .lb-desc {
+      font-size: 15px;
+      color: var(--ink-muted);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+    .lb-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .lb-skill-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-2);
+      color: var(--ink-muted);
+      border: 1px solid var(--border);
+    }
+
+    /* ===== LIGHTBOX NAV ===== */
+    /* Close button */
+    .lb-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lb-close:hover { background: rgba(196,88,59,0.55); transform: scale(1.1); }
+
+    /* Prev / Next */
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lb-nav:hover { background: rgba(196,88,59,0.55); transform: translateY(-50%) scale(1.1); }
+    .lb-prev { left: 14px; }
+    .lb-next { right: 14px; }
+    .lb-nav:disabled { opacity: 0.2; cursor: default; pointer-events: none; }
+
+    /* Dot indicators */
+    .lb-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+    .lb-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transition: background 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .lb-dot.active {
+      background: #fff;
+      transform: scale(1.4);
+    }
+
+    /* Counter */
+    .lb-counter {
+      position: absolute;
+      top: 16px;
+      left: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== INNER IMAGE NAV (within a project) ===== */
+    .lb-img-nav {
+      position: absolute;
+      bottom: 14px;
+      z-index: 10;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lb-img-nav:hover { background: rgba(232,184,109,0.5); transform: scale(1.1); }
+    .lb-img-nav:disabled { opacity: 0.2; cursor: default; pointer-events: none; }
+    .lb-img-prev { right: 60px; }
+    .lb-img-next { right: 14px; }
+
+    @media (min-width: 640px) {
+      .lb-img-prev { right: 60px; bottom: 20px; }
+      .lb-img-next { right: 14px; bottom: 20px; }
+    }
+
+    /* ===== TRANSITIONS ===== */
+    .lb-image-wrap.transitioning img,
+    .lb-image-wrap.transitioning .lb-placeholder { opacity: 0; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 640px) {
+      .lb-panel {
+        flex-direction: row;
+        max-height: 80vh;
+        height: 580px;
+      }
+      .lb-image-wrap {
+        width: 55%;
+        height: 100%;
+        flex-shrink: 0;
+      }
+      .lb-grad-bar {
+        display: none;
+      }
+      .lb-image-right-border {
+        width: 3px;
+        background: var(--grad);
+        flex-shrink: 0;
+        align-self: stretch;
+      }
+      .lb-info {
+        padding: 36px 32px;
+      }
+      .lb-close { top: 16px; right: 16px; }
+      .lb-nav { top: auto; bottom: 20px; transform: none; }
+      .lb-nav:hover { transform: scale(1.1); }
+      .lb-prev { left: 20px; bottom: 20px; }
+      .lb-next { left: 76px; bottom: 20px; }
+      .lb-dots { bottom: 26px; left: 145px; transform: none; }
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .gallery-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--ink-muted);
+      display: none;
+    }
+    .gallery-empty.show { display: block; }
+
+    /* ===== ABOUT SECTION ===== */
+    .about-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 24px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 640px) {
+      .about-section { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .about-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .about-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      line-height: 1.05;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    .about-bio {
+      font-size: 15px;
+      color: var(--ink-muted);
+      line-height: 1.8;
+    }
+    .about-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .about-contact {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .contact-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .contact-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-value:hover { color: var(--accent); }
+    .contact-divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+    .footer-copy a {
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-copy a:hover { color: var(--accent); }
+
+  </style>
+</head>
+<body>
+
+  <!-- THEME TOGGLE -->
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <div class="toggle-dot"></div>
+    <span id="toggle-label">Light Mode</span>
+  </button>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <p class="page-eyebrow">Portfolio — Marshall Amoranto</p>
+    <h1 class="page-title">The Work</h1>
+    <p class="page-sub">Graphic design, branding, and production work across print and digital.</p>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="email">Email</button>
+    <button class="filter-btn" data-filter="digital">Digital Ads</button>
+    <button class="filter-btn" data-filter="presentation">Presentation</button>
+    <button class="filter-btn" data-filter="production">Production</button>
+    <button class="filter-btn" data-filter="web">Web Design</button>
+  </div>
+
+  <!-- GALLERY GRID -->
+  <div class="gallery" id="gallery">
+
+    <!-- LegalZoom -->
+    <div class="gallery-card"
+      data-category="email"
+      data-img="https://www.space3001.com/popups/images/LZ6b.jpg"
+      data-images='["https://www.space3001.com/popups/images/LZ6b.jpg","https://www.space3001.com/popups/images/LZ5.jpg","https://www.space3001.com/popups/images/LZ4.jpg","https://www.space3001.com/popups/images/LZ3.jpg","https://www.space3001.com/popups/images/LZ7.jpg","https://www.space3001.com/popups/images/LZ8.jpg","https://www.space3001.com/popups/images/LZ9.jpg"]'
+      data-title="LegalZoom"
+      data-tag="Email Campaign"
+      data-desc="Email campaign design and production for LegalZoom. Designed and built a series of marketing emails covering promotions, onboarding, and transactional communications. 2014–2016."
+      data-skills="Email Design, HTML, CSS, Photoshop, Production">
+      <div class="card-thumb" style="background:linear-gradient(135deg,rgba(232,184,109,0.25),rgba(196,88,59,0.18));">
+        <img src="https://www.space3001.com/popups/images/LZ6b.jpg" alt="LegalZoom" loading="lazy" />
+      </div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Email Campaign</div>
+        <div class="card-title">LegalZoom</div>
+        <div class="card-desc">Email design &amp; production. 2014–2016.</div>
+      </div>
+    </div>
+
+    <!-- Joe Digital -->
+    <div class="gallery-card"
+      data-category="digital"
+      data-img="https://www.space3001.com/popups/images/JD1.jpg"
+      data-images='["https://www.space3001.com/popups/images/JD1.jpg","https://www.space3001.com/popups/images/JD2.jpg","https://www.space3001.com/popups/images/JD3.jpg","https://www.space3001.com/popups/images/JD4.jpg","https://www.space3001.com/popups/images/JD5.jpg"]'
+      data-title="Joe Digital"
+      data-tag="Digital Advertising"
+      data-desc="Digital advertising and design work produced at Joe Digital. A range of display, social, and campaign assets built for multiple clients and platforms."
+      data-skills="Photoshop, Illustrator, Digital Ads, Production">
+      <div class="card-thumb" style="background:linear-gradient(135deg,rgba(196,88,59,0.22),rgba(43,74,63,0.25));">
+        <img src="https://www.space3001.com/popups/images/JD1.jpg" alt="Joe Digital" loading="lazy" />
+      </div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Digital Advertising</div>
+        <div class="card-title">Joe Digital</div>
+        <div class="card-desc">Display &amp; campaign design.</div>
+      </div>
+    </div>
+
+    <!-- Booz Digital -->
+    <div class="gallery-card"
+      data-category="presentation"
+      data-img="https://www.space3001.com/popups/images/BD1a.jpg"
+      data-images='["https://www.space3001.com/popups/images/BD1a.jpg","https://www.space3001.com/popups/images/BD1b.jpg","https://www.space3001.com/popups/images/BD1c.jpg","https://www.space3001.com/popups/images/BD1d.jpg"]'
+      data-title="Booz Digital"
+      data-tag="Presentation Design"
+      data-desc="Presentation design for Booz Digital. Developed polished slide decks and visual frameworks used in client-facing pitches and internal strategy sessions. 2013."
+      data-skills="Presentation Design, PowerPoint, InDesign, Photoshop">
+      <div class="card-thumb" style="background:linear-gradient(135deg,rgba(43,74,63,0.22),rgba(232,184,109,0.18));">
+        <img src="https://www.space3001.com/popups/images/BD1a.jpg" alt="Booz Digital" loading="lazy" />
+      </div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Presentation Design</div>
+        <div class="card-title">Booz Digital</div>
+        <div class="card-desc">Pitch &amp; strategy decks. 2013.</div>
+      </div>
+    </div>
+
+    <!-- The Daily -->
+    <div class="gallery-card"
+      data-category="production"
+      data-img="https://www.space3001.com/popups/images/Ipad_UI_1.png"
+      data-images='["https://www.space3001.com/popups/images/Ipad_UI_1.png","https://www.space3001.com/popups/images/Ipad_UI_2.png","https://www.space3001.com/popups/images/Ipad_UI_3.jpg","https://www.space3001.com/popups/images/Ipad_UI_4.png","https://www.space3001.com/popups/images/Ipad_UI_5.png","https://www.space3001.com/popups/images/Ipad_UI_6.png","https://www.space3001.com/popups/images/Ipad_UI_7.png","https://www.space3001.com/popups/images/Ipad_UI_8.png","https://www.space3001.com/popups/images/Ipad_UI_9.png","https://www.space3001.com/popups/images/Ipad_UI_10.png","https://www.space3001.com/popups/images/Ipad_UI_11.png","https://www.space3001.com/popups/images/Ipad_UI_12.png"]'
+      data-title="The Daily"
+      data-tag="Production Design"
+      data-desc="Production design for The Daily, Rupert Murdoch's iPad-native newspaper — one of the first publications built exclusively for tablet. Designed and produced editorial layouts and UI components for the iPad edition. 2011–2013."
+      data-skills="Production Design, iPad UI, Photoshop, Editorial Layout">
+      <div class="card-thumb" style="background:linear-gradient(135deg,rgba(232,184,109,0.22),rgba(43,74,63,0.22));">
+        <img src="https://www.space3001.com/popups/images/Ipad_UI_1.png" alt="The Daily" loading="lazy" />
+      </div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Production Design</div>
+        <div class="card-title">The Daily</div>
+        <div class="card-desc">iPad editorial production. 2011–2013.</div>
+      </div>
+    </div>
+
+    <!-- Thoughthorse / Web Design -->
+    <div class="gallery-card"
+      data-category="web"
+      data-img="https://www.space3001.com/popups/images/webdesign1a_updated.jpg"
+      data-images='["https://www.space3001.com/popups/images/webdesign1a_updated.jpg","https://www.space3001.com/popups/images/webdesign2.jpg","https://www.space3001.com/popups/images/webdesign3.jpg"]'
+      data-title="Thoughthorse"
+      data-tag="Web Design"
+      data-desc="Web production design at Thoughthorse. Designed and built web pages and interactive components, translating creative direction into clean, functional front-end code. 2014."
+      data-skills="HTML, CSS, Web Design, Photoshop, Front-End">
+      <div class="card-thumb" style="background:linear-gradient(135deg,rgba(196,88,59,0.25),rgba(232,184,109,0.18));">
+        <img src="https://www.space3001.com/popups/images/webdesign1a_updated.jpg" alt="Thoughthorse" loading="lazy" />
+      </div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Web Design</div>
+        <div class="card-title">Thoughthorse</div>
+        <div class="card-desc">Web production &amp; front-end. 2014.</div>
+      </div>
+    </div>
+
+    <div class="gallery-empty" id="gallery-empty">
+      No projects in this category yet.
+    </div>
+  </div>
+
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about-section" id="about">
+
+    <!-- Left: Bio -->
+    <div>
+      <p class="about-eyebrow">About</p>
+      <h2 class="about-title">Marshall Amoranto</h2>
+      <p class="about-bio">
+        <!-- Replace this with your own bio -->
+        Graphic and production designer based in Los Angeles. Passionate about nature, sustainability, and design that actually means something — for people and the planet.
+      </p>
+      <div class="about-actions">
+        <a href="YOUR_RESUME_URL" target="_blank" class="btn btn-primary">Download Resume</a>
+        <a href="mailto:YOUR_EMAIL" class="btn btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+
+    <!-- Right: Contact details -->
+    <div class="about-contact">
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <a href="mailto:YOUR_EMAIL" class="contact-value">your@email.com</a>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-item">
+        <span class="contact-label">Resume</span>
+        <a href="YOUR_RESUME_URL" target="_blank" class="contact-value">Download PDF →</a>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-item">
+        <span class="contact-label">Location</span>
+        <span class="contact-value">Los Angeles, CA</span>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-item">
+        <span class="contact-label">Available for</span>
+        <span class="contact-value">Freelance &amp; Full-time</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="site-footer">
+      <span class="footer-name">space03</span>
+      <span class="footer-copy">
+        &copy; <span id="footer-year"></span> Marshall Amoranto. All rights reserved.
+      </span>
+    </div>
+  </footer>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project Detail">
+
+    <div class="lb-backdrop" onclick="closeLightbox()"></div>
+
+    <div class="lb-panel">
+
+      <!-- Close -->
+      <button class="lb-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+
+      <!-- Image -->
+      <div class="lb-image-wrap" id="lb-image-wrap">
+        <span class="lb-counter" id="lb-counter">1 / 6</span>
+        <!-- Prev/Next inside image on mobile; bottom-left on desktop -->
+        <button class="lb-nav lb-prev" id="lb-prev" onclick="navigate(-1)" aria-label="Previous project">←</button>
+        <button class="lb-nav lb-next" id="lb-next" onclick="navigate(1)" aria-label="Next project">→</button>
+        <div class="lb-dots" id="lb-dots"></div>
+        <!-- Content swapped by JS -->
+      </div>
+
+      <!-- Gradient divider (desktop: vertical bar) -->
+      <div class="lb-grad-bar"></div>
+      <div class="lb-image-right-border" style="display:none" id="lb-right-bar"></div>
+
+      <!-- Info -->
+      <div class="lb-info">
+        <div class="lb-tag" id="lb-tag"></div>
+        <div class="lb-title" id="lb-title"></div>
+        <div class="lb-desc" id="lb-desc"></div>
+        <div class="lb-tags" id="lb-skills"></div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script>
+    /* Footer year */
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    /* =============================================
+       THEME TOGGLE
+    ============================================= */
+    function toggleTheme() {
+      const html = document.documentElement;
+      const label = document.getElementById('toggle-label');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        label.textContent = 'Dark Mode';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        label.textContent = 'Light Mode';
+      }
+    }
+
+    /* =============================================
+       FILTER
+    ============================================= */
+    let currentFilter = 'all';
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentFilter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilter();
+        updateFilteredList();
+      });
+    });
+
+    function applyFilter() {
+      const cards = document.querySelectorAll('.gallery-card');
+      let visible = 0;
+      cards.forEach(card => {
+        const show = currentFilter === 'all' || card.dataset.category === currentFilter;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      const empty = document.getElementById('gallery-empty');
+      empty.classList.toggle('show', visible === 0);
+    }
+
+    /* =============================================
+       LIGHTBOX STATE
+       - projectIndex: which card/project is open
+       - imageIndex:   which image within that project
+    ============================================= */
+    let allProjects    = [];
+    let filteredProjects = [];
+    let projectIndex   = 0;
+    let imageIndex     = 0;
+
+    function buildProjectList() {
+      allProjects = Array.from(document.querySelectorAll('.gallery-card'));
+    }
+    function updateFilteredList() {
+      filteredProjects = allProjects.filter(c => c.style.display !== 'none');
+    }
+
+    buildProjectList();
+    updateFilteredList();
+
+    /* Click to open */
+    document.querySelectorAll('.gallery-card').forEach(card => {
+      card.addEventListener('click', () => {
+        updateFilteredList();
+        const idx = filteredProjects.indexOf(card);
+        if (idx === -1) return;
+        openLightbox(idx, 0);
+      });
+    });
+
+    /* =============================================
+       OPEN / CLOSE
+    ============================================= */
+    function openLightbox(pIdx, iIdx) {
+      projectIndex = pIdx;
+      imageIndex   = iIdx || 0;
+      renderLightbox(false);
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* =============================================
+       NAVIGATE
+       navigate(dir) moves between PROJECTS (prev/next card)
+       navigateImage(dir) moves between IMAGES within a project
+    ============================================= */
+    function navigate(dir) {
+      const next = projectIndex + dir;
+      if (next < 0 || next >= filteredProjects.length) return;
+      projectIndex = next;
+      imageIndex   = 0;
+      transition();
+    }
+
+    function navigateImage(dir) {
+      const card   = filteredProjects[projectIndex];
+      const images = getImages(card);
+      const next   = imageIndex + dir;
+      if (next < 0 || next >= images.length) return;
+      imageIndex = next;
+      transition();
+    }
+
+    function transition() {
+      const wrap = document.getElementById('lb-image-wrap');
+      wrap.classList.add('transitioning');
+      setTimeout(() => {
+        renderLightbox(true);
+        wrap.classList.remove('transitioning');
+      }, 200);
+    }
+
+    function getImages(card) {
+      try {
+        return JSON.parse(card.dataset.images || '[]');
+      } catch(e) {
+        return card.dataset.img ? [card.dataset.img] : [];
+      }
+    }
+
+    /* =============================================
+       RENDER
+    ============================================= */
+    function renderLightbox(keepInfo) {
+      const card    = filteredProjects[projectIndex];
+      const images  = getImages(card);
+      const imgUrl  = images[imageIndex] || '';
+      const total   = filteredProjects.length;
+      const imgTotal = images.length;
+
+      // ---- IMAGE AREA ----
+      const wrap = document.getElementById('lb-image-wrap');
+      const existingMedia = wrap.querySelector('.lb-media');
+      if (existingMedia) existingMedia.remove();
+
+      const media = document.createElement('div');
+      media.className = 'lb-media';
+      media.style.cssText = 'width:100%;height:100%;';
+
+      if (imgUrl) {
+        const i = document.createElement('img');
+        i.src = imgUrl;
+        i.alt = card.dataset.title || '';
+        media.appendChild(i);
+      } else {
+        const ph = document.createElement('div');
+        ph.className = 'lb-placeholder ct-1';
+        ph.textContent = '✦';
+        media.appendChild(ph);
+      }
+      wrap.insertBefore(media, wrap.querySelector('.lb-counter'));
+
+      // ---- PROJECT COUNTER (top-left) ----
+      document.getElementById('lb-counter').textContent = `${projectIndex + 1} / ${total}`;
+
+      // ---- PROJECT NAV (prev/next project) ----
+      document.getElementById('lb-prev').disabled = projectIndex === 0;
+      document.getElementById('lb-next').disabled = projectIndex === total - 1;
+
+      // ---- IMAGE DOTS (within project) ----
+      const dotsEl = document.getElementById('lb-dots');
+      dotsEl.innerHTML = '';
+      if (imgTotal > 1) {
+        images.forEach((_, i) => {
+          const dot = document.createElement('div');
+          dot.className = 'lb-dot' + (i === imageIndex ? ' active' : '');
+          dot.addEventListener('click', e => { e.stopPropagation(); navigateImage(i - imageIndex); });
+          dotsEl.appendChild(dot);
+        });
+      }
+
+      // ---- IMAGE ARROWS (within-project, shown only if >1 image) ----
+      let imgPrev = document.getElementById('lb-img-prev');
+      let imgNext = document.getElementById('lb-img-next');
+
+      // Create inner image nav arrows if not already present
+      if (!imgPrev) {
+        imgPrev = document.createElement('button');
+        imgPrev.id = 'lb-img-prev';
+        imgPrev.className = 'lb-img-nav lb-img-prev';
+        imgPrev.setAttribute('aria-label', 'Previous image');
+        imgPrev.innerHTML = '‹';
+        imgPrev.addEventListener('click', e => { e.stopPropagation(); navigateImage(-1); });
+        wrap.appendChild(imgPrev);
+      }
+      if (!imgNext) {
+        imgNext = document.createElement('button');
+        imgNext.id = 'lb-img-next';
+        imgNext.className = 'lb-img-nav lb-img-next';
+        imgNext.setAttribute('aria-label', 'Next image');
+        imgNext.innerHTML = '›';
+        imgNext.addEventListener('click', e => { e.stopPropagation(); navigateImage(1); });
+        wrap.appendChild(imgNext);
+      }
+
+      const showImgNav = imgTotal > 1;
+      imgPrev.style.display = showImgNav ? 'flex' : 'none';
+      imgNext.style.display = showImgNav ? 'flex' : 'none';
+      imgPrev.disabled = imageIndex === 0;
+      imgNext.disabled = imageIndex === imgTotal - 1;
+
+      // ---- IMAGE COUNTER inside info panel ----
+      let imgCountEl = document.getElementById('lb-img-count');
+      if (!imgCountEl) {
+        imgCountEl = document.createElement('div');
+        imgCountEl.id = 'lb-img-count';
+        imgCountEl.style.cssText = 'font-size:11px;color:var(--ink-faint);margin-top:14px;letter-spacing:0.06em;';
+        document.getElementById('lb-skills').after(imgCountEl);
+      }
+      imgCountEl.textContent = imgTotal > 1 ? `Image ${imageIndex + 1} of ${imgTotal}` : '';
+
+      // ---- INFO (only swap on project change) ----
+      if (!keepInfo) {
+        const title  = card.dataset.title  || '';
+        const tag    = card.dataset.tag    || '';
+        const desc   = card.dataset.desc   || '';
+        const skills = card.dataset.skills ? card.dataset.skills.split(',').map(s => s.trim()) : [];
+
+        document.getElementById('lb-tag').textContent   = tag;
+        document.getElementById('lb-title').textContent = title;
+        document.getElementById('lb-desc').innerHTML    = desc;
+
+        const skillsEl = document.getElementById('lb-skills');
+        skillsEl.innerHTML = '';
+        skills.forEach(s => {
+          const sp = document.createElement('span');
+          sp.className = 'lb-skill-tag';
+          sp.textContent = s;
+          skillsEl.appendChild(sp);
+        });
+      }
+
+      // Desktop vertical gradient bar
+      document.getElementById('lb-right-bar').style.display =
+        window.innerWidth >= 640 ? 'block' : 'none';
+    }
+
+    /* =============================================
+       KEYBOARD NAVIGATION
+       ← / → = move between images within project
+       Shift+← / Shift+→ = move between projects
+    ============================================= */
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') { closeLightbox(); return; }
+      if (e.shiftKey) {
+        if (e.key === 'ArrowLeft')  navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
+      } else {
+        if (e.key === 'ArrowLeft')  navigateImage(-1);
+        if (e.key === 'ArrowRight') navigateImage(1);
+      }
+    });
+
+    /* =============================================
+       TOUCH / SWIPE
+       Swipe on image area = next/prev image
+       Swipe on info area = next/prev project
+    ============================================= */
+    let touchStartX = 0;
+    let touchTarget = null;
+    const panel = document.querySelector('.lb-panel');
+    panel.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchTarget = e.target.closest('.lb-image-wrap') ? 'image' : 'info';
+    }, { passive: true });
+    panel.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) {
+        if (touchTarget === 'image') navigateImage(dx < 0 ? 1 : -1);
+        else navigate(dx < 0 ? 1 : -1);
+      }
+    });
+
+  </script>
+
+</body>
+</html>
