@@ -180,30 +180,40 @@
     .hero-label {
       position: absolute;
       top: 28px;
-      left: 36px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--espresso);
       z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
     .hero-label-text {
       background: rgba(255,255,255,0.82);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-      padding: 5px 12px;
+      padding: 5px 14px;
       border-radius: var(--radius-pill);
     }
-    .hero-label::before {
-      content: '';
-      display: inline-block;
-      width: 28px;
-      height: 1.5px;
-      background: rgba(28,16,7,0.4);
+    /* Desktop: left-align with decorative line */
+    @media (min-width: 640px) {
+      .hero-label {
+        left: 36px;
+        right: auto;
+        justify-content: flex-start;
+        gap: 10px;
+      }
+      .hero-label::before {
+        content: '';
+        display: inline-block;
+        width: 28px;
+        height: 1.5px;
+        background: rgba(28,16,7,0.4);
+      }
     }
 
     /* Bottom content block */
@@ -617,7 +627,30 @@
     }
 
     /* ===== LIGHTBOX NAV ===== */
-    /* Close button */
+    /* Mobile close bar */
+    .lb-close-mobile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      background: var(--espresso);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      order: 99;
+    }
+    @media (min-width: 640px) {
+      .lb-close-mobile { display: none; }
+    }
+
+    /* Desktop close button */
     .lb-close {
       position: absolute;
       top: 16px;
@@ -628,6 +661,11 @@
       background: rgba(0,0,0,0.5);
       border: 1px solid rgba(255,255,255,0.1);
       color: #fff;
+      display: none;
+    }
+    @media (min-width: 640px) {
+      .lb-close { display: flex; }
+    }
       font-size: 1.1rem;
       cursor: pointer;
       display: flex;
@@ -1181,6 +1219,9 @@
         <div class="lb-tags" id="lb-skills"></div>
       </div>
 
+      <!-- Mobile close bar -->
+      <button class="lb-close-mobile" onclick="closeLightbox()">✕ &nbsp;Close</button>
+
     </div>
   </div>
 
@@ -1349,7 +1390,7 @@
       if (next < 0 || next >= filteredProjects.length) return;
       projectIndex = next;
       imageIndex   = 0;
-      transition();
+      transition(false); // project changed — update info panel
     }
 
     function navigateImage(dir) {
@@ -1358,14 +1399,14 @@
       const next   = imageIndex + dir;
       if (next < 0 || next >= images.length) return;
       imageIndex = next;
-      transition();
+      transition(true); // same project — keep info panel
     }
 
-    function transition() {
+    function transition(keepInfo) {
       const wrap = document.getElementById('lb-image-wrap');
       wrap.classList.add('transitioning');
       setTimeout(() => {
-        renderLightbox(true);
+        renderLightbox(keepInfo);
         wrap.classList.remove('transitioning');
       }, 200);
     }
