@@ -42,20 +42,47 @@
 - Style guide v2: https://marshallamoranto.github.io/space03-dev/styleguide-v2.html
 - Font explorer: https://marshallamoranto.github.io/space03-dev/fonts2.html
 
-### Gallery Pages (built 2026-05-07)
-- `projects/space03/gallery.html` — Warm Sunset palette (Permanent Marker + Satoshi), dark mode with toggle
-- `projects/space03/gallery-70s.html` — 70s Record palette (Permanent Marker + DM Sans), light mode only (Cream base)
-- Both have: filter bar, clickable cards, lightbox with multi-image nav per project, About section, footer
-- Real projects ported from space3001.com: LegalZoom, Joe Digital, Booz Digital, The Daily, Thoughthorse
-- gallery-70s: mobile = centered/stacked; desktop = two-column about + space-between footer
-- GitHub Pages: https://marshallamoranto.github.io/space03-dev/projects/space03/gallery.html
-- GitHub Pages: https://marshallamoranto.github.io/space03-dev/projects/space03/gallery-70s.html
+### Gallery Pages (built + iterated 2026-05-07)
+
+#### gallery.html — Warm Sunset version
+- Palette: Amber #FF9A3C → Rose #FF4E8A → Plum #7B2FBE | Fonts: Permanent Marker + Satoshi
+- Dark mode with toggle
+- URL: https://marshallamoranto.github.io/space03-dev/projects/space03/gallery.html
+
+#### gallery-70s.html — 70s Record version (PRIMARY / most developed)
+- Palette: Cream #F2E8D9, Gold #E8B86D, Rust #C4583B, Forest #2B4A3F, Espresso #1C1007, Sage #A8C5A0
+- Fonts: Permanent Marker + DM Sans | Light mode only
+- URL: https://marshallamoranto.github.io/space03-dev/projects/space03/gallery-70s.html
+
+**Page structure:**
+1. Sticky nav — Espresso bg, Gold border, Gold logo, Rust Resume CTA
+2. Hero (90vh full-bleed) — random featured project, dot switcher, Ken Burns zoom, dark bottom gradient, frosted white pill labels ("Featured Work" + category), Gold CTA button
+3. Page header + filter bar (All / Email / Digital Ads / Presentation / Production / Web Design)
+4. Gallery grid — 5 cards, click opens lightbox
+5. About section — Forest bg, two-column desktop / centered mobile, Cream/Gold text, Rust + ghost buttons
+6. Footer — Espresso bg, Gold border, full-width
+
+**Lightbox:**
+- Inner nav (‹ ›) flips images within a project; outer nav (← →) changes project + updates info panel
+- Desktop: image left / info right | Mobile: stacked + Espresso "✕ Close" bar at bottom
+
+**Real projects (images from space3001.com/popups/images/):**
+- LegalZoom — Email Campaign — LZ6b, LZ5, LZ4, LZ3, LZ7, LZ8, LZ9
+- Joe Digital — Digital Advertising — JD1–JD5
+- Booz Digital — Presentation Design — BD1a–BD1d
+- The Daily — Production Design — Ipad_UI_1–12
+- Thoughthorse — Web Design — webdesign1a_updated, webdesign2, webdesign3
+
+**Still needs (placeholders in file):**
+- YOUR_EMAIL → marshall@space3001.com (or new address)
+- YOUR_RESUME_URL → https://www.space3001.com/images/Resume.pdf (or updated PDF)
+- Real bio text in About section
 
 ### Next Steps (when Marshall is ready)
-1. Choose light or dark background (or hybrid)
-2. Decide on hero animation concept
-3. Build full homepage HTML structure
-4. Port portfolio pieces from space3001.com
+1. Swap in real email + resume URL
+2. Write real bio for About section
+3. Decide on hero animation concept (TBD)
+4. Decision: expand gallery-70s into full space03.com homepage?
 
 ## Investment Project
 - **File:** `portfolio.md` — full holdings, contributions log, watch list
