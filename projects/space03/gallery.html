@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>space03 — Portfolio Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400;500;700&display=swap" />
+
+  <style>
+    /* =============================================
+       SPACE03 — PORTFOLIO GALLERY + LIGHTBOX
+       Font: Permanent Marker + Satoshi
+       Palette: Warm Sunset
+    ============================================= */
+
+    :root {
+      --grad:        linear-gradient(135deg, #FF9A3C 0%, #FF4E8A 55%, #7B2FBE 100%);
+      --grad-soft:   linear-gradient(135deg, rgba(255,154,60,0.15) 0%, rgba(255,78,138,0.1) 55%, rgba(123,47,190,0.08) 100%);
+      --amber:       #FF9A3C;
+      --rose:        #FF4E8A;
+      --plum:        #7B2FBE;
+      --deep:        #1A0A2E;
+
+      --font-display: 'Permanent Marker', cursive;
+      --font-body:    'Satoshi', 'DM Sans', system-ui, sans-serif;
+
+      --radius-sm:   8px;
+      --radius-md:   16px;
+      --radius-lg:   24px;
+      --radius-xl:   40px;
+      --radius-pill: 999px;
+
+      --shadow-sm:   0 2px 12px rgba(0,0,0,0.08);
+      --shadow-md:   0 8px 32px rgba(0,0,0,0.12);
+      --shadow-lg:   0 24px 64px rgba(0,0,0,0.25);
+    }
+
+    [data-theme="dark"] {
+      --bg:          #0D0D0D;
+      --bg-2:        #161616;
+      --surface:     #1E1E1E;
+      --surface-2:   #252525;
+      --border:      rgba(255,255,255,0.07);
+      --ink:         #F0EDE8;
+      --ink-muted:   #888;
+      --ink-faint:   #333;
+    }
+
+    [data-theme="light"] {
+      --bg:          #FAF8F5;
+      --bg-2:        #F2EEE8;
+      --surface:     #FFFFFF;
+      --surface-2:   #F7F4F0;
+      --border:      rgba(0,0,0,0.07);
+      --ink:         #1A1208;
+      --ink-muted:   #8A8070;
+      --ink-faint:   #D0C8BE;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ===== THEME TOGGLE ===== */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 8px 16px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      box-shadow: var(--shadow-md);
+      transition: all 0.2s;
+    }
+    .theme-toggle:hover { color: var(--ink); }
+    .toggle-dot {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--grad);
+      flex-shrink: 0;
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      text-align: center;
+      padding: 80px 24px 48px;
+    }
+    .page-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 16px;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 7vw, 4.5rem);
+      line-height: 1.0;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .page-sub {
+      font-size: 1rem;
+      color: var(--ink-muted);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* ===== FILTER TABS ===== */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0 24px 48px;
+    }
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 8px 20px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      color: var(--ink);
+      border-color: var(--rose);
+    }
+    .filter-btn.active {
+      background: var(--grad);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(255,78,138,0.25);
+    }
+
+    /* ===== GALLERY GRID ===== */
+    .gallery {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* ===== GALLERY CARD ===== */
+    .gallery-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .gallery-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Hover overlay */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--grad);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-overlay-icon {
+      font-size: 2rem;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.25s ease 0.05s, transform 0.25s ease 0.05s;
+      color: #fff;
+    }
+    .gallery-card:hover .card-overlay { opacity: 0.15; }
+    .gallery-card:hover .card-overlay-icon { opacity: 1; transform: scale(1); }
+
+    /* Thumbnail area */
+    .card-thumb {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Placeholder gradient thumbs (used when no img) */
+    .ct-1 { background: linear-gradient(135deg, rgba(255,154,60,0.25), rgba(255,78,138,0.18)); }
+    .ct-2 { background: linear-gradient(135deg, rgba(255,78,138,0.18), rgba(123,47,190,0.22)); }
+    .ct-3 { background: linear-gradient(135deg, rgba(123,47,190,0.18), rgba(255,154,60,0.15)); }
+    .ct-4 { background: linear-gradient(135deg, rgba(255,154,60,0.18), rgba(123,47,190,0.2)); }
+    .ct-5 { background: linear-gradient(135deg, rgba(255,78,138,0.22), rgba(255,154,60,0.15)); }
+    .ct-6 { background: linear-gradient(135deg, rgba(123,47,190,0.22), rgba(255,78,138,0.18)); }
+
+    .card-body { padding: 18px 20px 22px; }
+    .card-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+
+    /* Backdrop */
+    .lb-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 5, 20, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Panel */
+    .lb-panel {
+      position: relative;
+      z-index: 1;
+      width: min(92vw, 900px);
+      max-height: 90vh;
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+
+      /* Entry animation */
+      animation: lbIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(0.92) translateY(16px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Image area */
+    .lb-image-wrap {
+      flex-shrink: 0;
+      height: min(50vh, 460px);
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+    .lb-image-wrap img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.25s;
+    }
+    /* Placeholder (no img) */
+    .lb-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    /* Gradient bar under image */
+    .lb-grad-bar {
+      height: 3px;
+      background: var(--grad);
+      flex-shrink: 0;
+    }
+
+    /* Info area */
+    .lb-info {
+      padding: 28px 32px 32px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .lb-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 10px;
+    }
+    .lb-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      line-height: 1.05;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+    }
+    .lb-desc {
+      font-size: 15px;
+      color: var(--ink-muted);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+    .lb-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .lb-skill-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-2);
+      color: var(--ink-muted);
+      border: 1px solid var(--border);
+    }
+
+    /* ===== LIGHTBOX NAV ===== */
+    /* Close button */
+    .lb-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lb-close:hover { background: rgba(255,78,138,0.5); transform: scale(1.1); }
+
+    /* Prev / Next */
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lb-nav:hover { background: rgba(255,78,138,0.5); transform: translateY(-50%) scale(1.1); }
+    .lb-prev { left: 14px; }
+    .lb-next { right: 14px; }
+    .lb-nav:disabled { opacity: 0.2; cursor: default; pointer-events: none; }
+
+    /* Dot indicators */
+    .lb-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+    .lb-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transition: background 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .lb-dot.active {
+      background: #fff;
+      transform: scale(1.4);
+    }
+
+    /* Counter */
+    .lb-counter {
+      position: absolute;
+      top: 16px;
+      left: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== TRANSITIONS ===== */
+    .lb-image-wrap.transitioning img,
+    .lb-image-wrap.transitioning .lb-placeholder { opacity: 0; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 640px) {
+      .lb-panel {
+        flex-direction: row;
+        max-height: 80vh;
+        height: 580px;
+      }
+      .lb-image-wrap {
+        width: 55%;
+        height: 100%;
+        flex-shrink: 0;
+      }
+      .lb-grad-bar {
+        display: none;
+      }
+      .lb-image-right-border {
+        width: 3px;
+        background: var(--grad);
+        flex-shrink: 0;
+        align-self: stretch;
+      }
+      .lb-info {
+        padding: 36px 32px;
+      }
+      .lb-close { top: 16px; right: 16px; }
+      .lb-nav { top: auto; bottom: 20px; transform: none; }
+      .lb-nav:hover { transform: scale(1.1); }
+      .lb-prev { left: 20px; bottom: 20px; }
+      .lb-next { left: 76px; bottom: 20px; }
+      .lb-dots { bottom: 26px; left: 145px; transform: none; }
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .gallery-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--ink-muted);
+      display: none;
+    }
+    .gallery-empty.show { display: block; }
+
+  </style>
+</head>
+<body>
+
+  <!-- THEME TOGGLE -->
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <div class="toggle-dot"></div>
+    <span id="toggle-label">Light Mode</span>
+  </button>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <p class="page-eyebrow">Portfolio — Marshall Amoranto</p>
+    <h1 class="page-title">The Work</h1>
+    <p class="page-sub">Graphic design, branding, and production work across print and digital.</p>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="branding">Branding</button>
+    <button class="filter-btn" data-filter="web">Web Design</button>
+    <button class="filter-btn" data-filter="print">Print</button>
+    <button class="filter-btn" data-filter="motion">Motion</button>
+  </div>
+
+  <!-- GALLERY GRID -->
+  <div class="gallery" id="gallery">
+
+    <!--
+      TO ADD YOUR OWN PROJECT:
+      Copy a .gallery-card block below and update:
+        data-category  → branding | web | print | motion
+        data-img       → path or URL to your image (or leave empty for placeholder)
+        data-title     → project title
+        data-tag       → category label
+        data-desc      → description (can include HTML)
+        data-skills    → comma-separated skill tags
+        .card-thumb    → add ct-1 through ct-6 for placeholder gradient color
+        emoji inside   → shown when no image
+    -->
+
+    <div class="gallery-card"
+      data-category="branding"
+      data-img=""
+      data-title="Project Title One"
+      data-tag="Branding"
+      data-desc="Full brand identity system including logo design, color system, typography, and brand guidelines. Delivered across print and digital applications."
+      data-skills="Illustrator, Photoshop, InDesign, Branding">
+      <div class="card-thumb ct-1">🎨</div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Branding</div>
+        <div class="card-title">Project Title One</div>
+        <div class="card-desc">Brand identity and visual system.</div>
+      </div>
+    </div>
+
+    <div class="gallery-card"
+      data-category="web"
+      data-img=""
+      data-title="Project Title Two"
+      data-tag="Web Design"
+      data-desc="Responsive website design and front-end build. Focused on clean layout, legible typography, and smooth interaction across all devices."
+      data-skills="HTML, CSS, Figma, Web Design">
+      <div class="card-thumb ct-2">🌐</div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Web Design</div>
+        <div class="card-title">Project Title Two</div>
+        <div class="card-desc">Website design and front-end build.</div>
+      </div>
+    </div>
+
+    <div class="gallery-card"
+      data-category="print"
+      data-img=""
+      data-title="Project Title Three"
+      data-tag="Print"
+      data-desc="Print production package: editorial layout, packaging design, and large-format materials. Prepress-ready files delivered for offset and digital print."
+      data-skills="InDesign, Illustrator, Photoshop, Print">
+      <div class="card-thumb ct-3">🖨️</div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Print</div>
+        <div class="card-title">Project Title Three</div>
+        <div class="card-desc">Print production and editorial layout.</div>
+      </div>
+    </div>
+
+    <div class="gallery-card"
+      data-category="motion"
+      data-img=""
+      data-title="Project Title Four"
+      data-tag="Motion"
+      data-desc="Motion graphics and animated content for social and broadcast. Designed in After Effects, with custom-built frame-by-frame transitions and kinetic type."
+      data-skills="After Effects, Premiere, Motion Graphics">
+      <div class="card-thumb ct-4">✦</div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Motion</div>
+        <div class="card-title">Project Title Four</div>
+        <div class="card-desc">Motion graphics and animated content.</div>
+      </div>
+    </div>
+
+    <div class="gallery-card"
+      data-category="branding"
+      data-img=""
+      data-title="Project Title Five"
+      data-tag="Branding"
+      data-desc="Campaign identity and collateral suite. Brand direction, photography art direction, and final production across OOH, digital, and print formats."
+      data-skills="Illustrator, Photoshop, InDesign, Art Direction">
+      <div class="card-thumb ct-5">🌿</div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Branding</div>
+        <div class="card-title">Project Title Five</div>
+        <div class="card-desc">Campaign identity and collateral.</div>
+      </div>
+    </div>
+
+    <div class="gallery-card"
+      data-category="web"
+      data-img=""
+      data-title="Project Title Six"
+      data-tag="Web Design"
+      data-desc="E-commerce redesign focused on conversion and accessibility. User research, wireframes, visual design, and prototype handoff."
+      data-skills="Figma, HTML, CSS, UX, Web Design">
+      <div class="card-thumb ct-6">💻</div>
+      <div class="card-overlay"><div class="card-overlay-icon">↗</div></div>
+      <div class="card-body">
+        <div class="card-tag">Web Design</div>
+        <div class="card-title">Project Title Six</div>
+        <div class="card-desc">E-commerce redesign and UX.</div>
+      </div>
+    </div>
+
+    <div class="gallery-empty" id="gallery-empty">
+      No projects in this category yet.
+    </div>
+  </div>
+
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project Detail">
+
+    <div class="lb-backdrop" onclick="closeLightbox()"></div>
+
+    <div class="lb-panel">
+
+      <!-- Close -->
+      <button class="lb-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+
+      <!-- Image -->
+      <div class="lb-image-wrap" id="lb-image-wrap">
+        <span class="lb-counter" id="lb-counter">1 / 6</span>
+        <!-- Prev/Next inside image on mobile; bottom-left on desktop -->
+        <button class="lb-nav lb-prev" id="lb-prev" onclick="navigate(-1)" aria-label="Previous project">←</button>
+        <button class="lb-nav lb-next" id="lb-next" onclick="navigate(1)" aria-label="Next project">→</button>
+        <div class="lb-dots" id="lb-dots"></div>
+        <!-- Content swapped by JS -->
+      </div>
+
+      <!-- Gradient divider (desktop: vertical bar) -->
+      <div class="lb-grad-bar"></div>
+      <div class="lb-image-right-border" style="display:none" id="lb-right-bar"></div>
+
+      <!-- Info -->
+      <div class="lb-info">
+        <div class="lb-tag" id="lb-tag"></div>
+        <div class="lb-title" id="lb-title"></div>
+        <div class="lb-desc" id="lb-desc"></div>
+        <div class="lb-tags" id="lb-skills"></div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script>
+    /* =============================================
+       THEME TOGGLE
+    ============================================= */
+    function toggleTheme() {
+      const html = document.documentElement;
+      const label = document.getElementById('toggle-label');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        label.textContent = 'Dark Mode';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        label.textContent = 'Light Mode';
+      }
+    }
+
+    /* =============================================
+       FILTER
+    ============================================= */
+    let currentFilter = 'all';
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentFilter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilter();
+        updateFilteredList();
+      });
+    });
+
+    function applyFilter() {
+      const cards = document.querySelectorAll('.gallery-card');
+      let visible = 0;
+      cards.forEach(card => {
+        const show = currentFilter === 'all' || card.dataset.category === currentFilter;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      const empty = document.getElementById('gallery-empty');
+      empty.classList.toggle('show', visible === 0);
+    }
+
+    /* =============================================
+       LIGHTBOX STATE
+    ============================================= */
+    let allProjects = [];    // all cards (in DOM order)
+    let filteredProjects = []; // currently visible ones
+    let currentIndex = 0;
+
+    function buildProjectList() {
+      allProjects = Array.from(document.querySelectorAll('.gallery-card'));
+    }
+
+    function updateFilteredList() {
+      filteredProjects = allProjects.filter(c => c.style.display !== 'none');
+    }
+
+    buildProjectList();
+    updateFilteredList();
+
+    /* Click to open */
+    document.querySelectorAll('.gallery-card').forEach(card => {
+      card.addEventListener('click', () => {
+        updateFilteredList();
+        const idx = filteredProjects.indexOf(card);
+        if (idx === -1) return;
+        openLightbox(idx);
+      });
+    });
+
+    /* =============================================
+       OPEN / CLOSE
+    ============================================= */
+    function openLightbox(idx) {
+      currentIndex = idx;
+      renderLightbox();
+      const lb = document.getElementById('lightbox');
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* =============================================
+       NAVIGATE
+    ============================================= */
+    function navigate(dir) {
+      const next = currentIndex + dir;
+      if (next < 0 || next >= filteredProjects.length) return;
+      currentIndex = next;
+
+      // Transition animation
+      const wrap = document.getElementById('lb-image-wrap');
+      wrap.classList.add('transitioning');
+      setTimeout(() => {
+        renderLightbox();
+        wrap.classList.remove('transitioning');
+      }, 200);
+    }
+
+    /* =============================================
+       RENDER
+    ============================================= */
+    function renderLightbox() {
+      const card = filteredProjects[currentIndex];
+      const total = filteredProjects.length;
+
+      const img     = card.dataset.img   || '';
+      const title   = card.dataset.title || '';
+      const tag     = card.dataset.tag   || '';
+      const desc    = card.dataset.desc  || '';
+      const skills  = card.dataset.skills ? card.dataset.skills.split(',').map(s => s.trim()) : [];
+      // Emoji from the card thumb (for placeholder)
+      const emoji   = card.querySelector('.card-thumb') && !card.querySelector('.card-thumb img')
+                        ? (card.querySelector('.card-thumb').textContent.trim() || '✦')
+                        : '✦';
+      // Placeholder bg class
+      const thumbEl = card.querySelector('.card-thumb');
+      const ctClass = thumbEl ? Array.from(thumbEl.classList).find(c => c.startsWith('ct-')) || 'ct-1' : 'ct-1';
+
+      // Inject image area
+      const wrap = document.getElementById('lb-image-wrap');
+      const existingMedia = wrap.querySelector('.lb-media');
+      if (existingMedia) existingMedia.remove();
+
+      const media = document.createElement('div');
+      media.className = 'lb-media';
+      media.style.cssText = 'width:100%;height:100%;';
+
+      if (img) {
+        const i = document.createElement('img');
+        i.src = img;
+        i.alt = title;
+        media.appendChild(i);
+      } else {
+        const ph = document.createElement('div');
+        ph.className = `lb-placeholder ${ctClass}`;
+        ph.textContent = emoji;
+        media.appendChild(ph);
+      }
+
+      // Insert before the counter (first child)
+      wrap.insertBefore(media, wrap.querySelector('.lb-counter'));
+
+      // Counter
+      document.getElementById('lb-counter').textContent = `${currentIndex + 1} / ${total}`;
+
+      // Nav buttons
+      document.getElementById('lb-prev').disabled = currentIndex === 0;
+      document.getElementById('lb-next').disabled = currentIndex === total - 1;
+
+      // Dots
+      const dotsEl = document.getElementById('lb-dots');
+      dotsEl.innerHTML = '';
+      filteredProjects.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'lb-dot' + (i === currentIndex ? ' active' : '');
+        dot.addEventListener('click', (e) => { e.stopPropagation(); navigate(i - currentIndex); });
+        dotsEl.appendChild(dot);
+      });
+
+      // Info
+      document.getElementById('lb-tag').textContent   = tag;
+      document.getElementById('lb-title').textContent = title;
+      document.getElementById('lb-desc').innerHTML    = desc;
+
+      const skillsEl = document.getElementById('lb-skills');
+      skillsEl.innerHTML = '';
+      skills.forEach(s => {
+        const sp = document.createElement('span');
+        sp.className = 'lb-skill-tag';
+        sp.textContent = s;
+        skillsEl.appendChild(sp);
+      });
+
+      // Desktop: show vertical gradient bar
+      const isDesktop = window.innerWidth >= 640;
+      const bar = document.getElementById('lb-right-bar');
+      bar.style.display = isDesktop ? 'block' : 'none';
+    }
+
+    /* =============================================
+       KEYBOARD NAVIGATION
+    ============================================= */
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape')      closeLightbox();
+      if (e.key === 'ArrowLeft')   navigate(-1);
+      if (e.key === 'ArrowRight')  navigate(1);
+    });
+
+    /* =============================================
+       TOUCH / SWIPE
+    ============================================= */
+    let touchStartX = 0;
+    const panel = document.querySelector('.lb-panel');
+    panel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    panel.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) navigate(dx < 0 ? 1 : -1);
+    });
+
+  </script>
+
+</body>
+</html>
