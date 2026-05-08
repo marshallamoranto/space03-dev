@@ -667,17 +667,15 @@
       background: rgba(0,0,0,0.5);
       border: 1px solid rgba(255,255,255,0.1);
       color: #fff;
-      display: none;
-    }
-    @media (min-width: 640px) {
-      .lb-close { display: flex; }
-    }
       font-size: 1.1rem;
       cursor: pointer;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       transition: background 0.2s, transform 0.2s;
+    }
+    @media (min-width: 640px) {
+      .lb-close { display: flex; }
     }
     .lb-close:hover { background: rgba(196,88,59,0.55); transform: scale(1.1); }
 
