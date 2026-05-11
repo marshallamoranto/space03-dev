@@ -50,17 +50,19 @@
 - URL: https://marshallamoranto.github.io/space03-dev/projects/space03/gallery.html
 
 #### gallery-70s.html — 70s Record version (PRIMARY / most developed)
-- Palette: Cream #F2E8D9, Gold #E8B86D, Rust #C4583B, Forest #2B4A3F, Espresso #1C1007, Sage #A8C5A0
+- Palette: Cream #F2E8D9, Rust #C4583B, Forest #2B4A3F, Espresso #1C1007, Sage #A8C5A0
+- **Gold (#E8B86D) replaced with White (#FFFFFF) throughout** (2026-05-11)
 - Fonts: Permanent Marker + DM Sans | Light mode only
 - URL: https://marshallamoranto.github.io/space03-dev/projects/space03/gallery-70s.html
+- **Live on server:** http://space03.com/new/gallery-70s.html (subfolder, WP still at root)
 
 **Page structure:**
-1. Sticky nav — Espresso bg, Gold border, Gold logo, Rust Resume CTA
-2. Hero (90vh full-bleed) — random featured project, dot switcher, Ken Burns zoom, dark bottom gradient, frosted white pill labels ("Featured Work" + category), Gold CTA button
+1. Sticky nav — Espresso bg, White border, White logo, Rust Resume CTA
+2. Hero (90vh full-bleed) — random featured project, dot switcher, Ken Burns zoom, dark bottom gradient, White CTA button. "Featured Work" label REMOVED (2026-05-11)
 3. Page header + filter bar (All / Email / Digital Ads / Presentation / Production / Web Design)
 4. Gallery grid — 5 cards, click opens lightbox
-5. About section — Forest bg, two-column desktop / centered mobile, Cream/Gold text, Rust + ghost buttons
-6. Footer — Espresso bg, Gold border, full-width
+5. About section — Forest bg, two-column desktop / centered mobile, Cream/White text, Rust + ghost buttons
+6. Footer — Espresso bg, White border, full-width
 
 **Lightbox:**
 - Inner nav (‹ ›) flips images within a project; outer nav (← →) changes project + updates info panel
@@ -78,11 +80,53 @@
 - YOUR_RESUME_URL → https://www.space3001.com/images/Resume.pdf (or updated PDF)
 - Real bio text in About section
 
+### Key Bug Fixes Applied (for reference)
+- Active filter button: `border: none` on `.filter-btn.active` — border was causing dark edge artifact with gradient
+- Lightbox ✕ close button: `align-items/justify-content: center` must stay inside `.lb-close` rule (CSS was malformed/orphaned)
+- Footer: removed `max-width: 1100px` — now spans full width like the nav
+- Top bar: White bar at very top of page with "The Portfolio of Marshall Amoranto" (above nav)
+- Gradient text wash fix (2026-05-11): `.lb-title` and `.page-title` use hardcoded `linear-gradient(135deg, #C4583B 0%, #2B4A3F 100%)` — NOT `var(--grad)` which starts white and washes out on light bg
+
+### Hero Image System (added 2026-05-11)
+- Hero uses **separate dedicated images** from lightbox/portfolio images
+- Each card has `data-hero-img` (desktop) and `data-hero-img-mobile` (mobile) attributes
+- JS picks desktop vs mobile based on viewport width (breakpoint: 640px)
+- Falls back to `data-img` (first portfolio image) if no hero image set yet
+- Hero images live in `hero-images/` folder on server
+- **Image specs saved to:** `projects/space03/IMAGE-SPECS.md`
+  - Hero desktop: 1600×900px, safe area 1100×600px, JPG, 200–350KB
+  - Hero mobile: 800×1000px, safe area 640×800px, JPG, 100–180KB
+  - Gallery thumb: 600×400px, JPG, 60–120KB
+  - Lightbox: 1400px max, JPG/PNG, 150–400KB
+- **Filename convention:** `[project]-hero.jpg` / `[project]-hero-mobile.jpg`
+  - legalzoom, joedigital, boozdigital, thedaily, thoughthorse
+
+### FTP / Deployment (set up 2026-05-11)
+- **FTP host:** 69.31.189.18 (space03.com resolves here)
+- **Username:** space03
+- **Remote web root:** `/public_html/` (WordPress still lives here)
+- **Current staging path:** `/public_html/new/` → http://space03.com/new/gallery-70s.html
+- **hero-images/ folder** created on server at `/public_html/new/hero-images/`
+- **Desktop upload folder:** `~/Desktop/space03-upload/` — always kept in sync with latest HTML
+- Kai can FTP upload directly using curl to 69.31.189.18
+- When ready to go live at root: rename/disable WP `index.php`, promote `gallery-70s.html`
+
+### Adding/Editing Portfolio Pieces
+Each card is a `<div class="gallery-card">` block with these data attributes:
+- `data-category` — filter category (email / digital / presentation / production / web)
+- `data-img` — thumbnail / first image URL
+- `data-images` — JSON array of all image URLs for that project
+- `data-hero-img` / `data-hero-img-mobile` — dedicated hero background images
+- `data-title`, `data-tag`, `data-desc`, `data-skills` — text content
+- Kai can add/edit/remove cards and FTP directly to the server
+
 ### Next Steps (when Marshall is ready)
-1. Swap in real email + resume URL
-2. Write real bio for About section
-3. Decide on hero animation concept (TBD)
-4. Decision: expand gallery-70s into full space03.com homepage?
+1. Create hero images (desktop + mobile) for each project per IMAGE-SPECS.md
+2. Upload hero images → Kai can FTP them directly once files are ready
+3. Swap in real email + resume URL (placeholders: YOUR_EMAIL, YOUR_RESUME_URL)
+4. Write real bio for About section
+5. Upload portfolio images to space03.com server and update src paths (currently hotlinked from space3001.com)
+6. Go live at root — promote from /new/ to public_html/
 
 ## Investment Project
 - **File:** `portfolio.md` — full holdings, contributions log, watch list
