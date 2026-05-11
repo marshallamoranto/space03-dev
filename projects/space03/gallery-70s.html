@@ -1036,6 +1036,8 @@
       data-category="email"
       data-img="https://www.space3001.com/popups/images/LZ6b.jpg"
       data-images='["https://www.space3001.com/popups/images/LZ6b.jpg","https://www.space3001.com/popups/images/LZ5.jpg","https://www.space3001.com/popups/images/LZ4.jpg","https://www.space3001.com/popups/images/LZ3.jpg","https://www.space3001.com/popups/images/LZ7.jpg","https://www.space3001.com/popups/images/LZ8.jpg","https://www.space3001.com/popups/images/LZ9.jpg"]'
+      data-hero-img="hero-images/legalzoom-hero.jpg"
+      data-hero-img-mobile="hero-images/legalzoom-hero-mobile.jpg"
       data-title="LegalZoom"
       data-tag="Email Campaign"
       data-desc="Email campaign design and production for LegalZoom. Designed and built a series of marketing emails covering promotions, onboarding, and transactional communications. 2014–2016."
@@ -1056,6 +1058,8 @@
       data-category="digital"
       data-img="https://www.space3001.com/popups/images/JD1.jpg"
       data-images='["https://www.space3001.com/popups/images/JD1.jpg","https://www.space3001.com/popups/images/JD2.jpg","https://www.space3001.com/popups/images/JD3.jpg","https://www.space3001.com/popups/images/JD4.jpg","https://www.space3001.com/popups/images/JD5.jpg"]'
+      data-hero-img="hero-images/joedigital-hero.jpg"
+      data-hero-img-mobile="hero-images/joedigital-hero-mobile.jpg"
       data-title="Joe Digital"
       data-tag="Digital Advertising"
       data-desc="Digital advertising and design work produced at Joe Digital. A range of display, social, and campaign assets built for multiple clients and platforms."
@@ -1076,6 +1080,8 @@
       data-category="presentation"
       data-img="https://www.space3001.com/popups/images/BD1a.jpg"
       data-images='["https://www.space3001.com/popups/images/BD1a.jpg","https://www.space3001.com/popups/images/BD1b.jpg","https://www.space3001.com/popups/images/BD1c.jpg","https://www.space3001.com/popups/images/BD1d.jpg"]'
+      data-hero-img="hero-images/boozdigital-hero.jpg"
+      data-hero-img-mobile="hero-images/boozdigital-hero-mobile.jpg"
       data-title="Booz Digital"
       data-tag="Presentation Design"
       data-desc="Presentation design for Booz Digital. Developed polished slide decks and visual frameworks used in client-facing pitches and internal strategy sessions. 2013."
@@ -1096,6 +1102,8 @@
       data-category="production"
       data-img="https://www.space3001.com/popups/images/Ipad_UI_1.png"
       data-images='["https://www.space3001.com/popups/images/Ipad_UI_1.png","https://www.space3001.com/popups/images/Ipad_UI_2.png","https://www.space3001.com/popups/images/Ipad_UI_3.jpg","https://www.space3001.com/popups/images/Ipad_UI_4.png","https://www.space3001.com/popups/images/Ipad_UI_5.png","https://www.space3001.com/popups/images/Ipad_UI_6.png","https://www.space3001.com/popups/images/Ipad_UI_7.png","https://www.space3001.com/popups/images/Ipad_UI_8.png","https://www.space3001.com/popups/images/Ipad_UI_9.png","https://www.space3001.com/popups/images/Ipad_UI_10.png","https://www.space3001.com/popups/images/Ipad_UI_11.png","https://www.space3001.com/popups/images/Ipad_UI_12.png"]'
+      data-hero-img="hero-images/thedaily-hero.jpg"
+      data-hero-img-mobile="hero-images/thedaily-hero-mobile.jpg"
       data-title="The Daily"
       data-tag="Production Design"
       data-desc="Production design for The Daily, Rupert Murdoch's iPad-native newspaper — one of the first publications built exclusively for tablet. Designed and produced editorial layouts and UI components for the iPad edition. 2011–2013."
@@ -1116,6 +1124,8 @@
       data-category="web"
       data-img="https://www.space3001.com/popups/images/webdesign1a_updated.jpg"
       data-images='["https://www.space3001.com/popups/images/webdesign1a_updated.jpg","https://www.space3001.com/popups/images/webdesign2.jpg","https://www.space3001.com/popups/images/webdesign3.jpg"]'
+      data-hero-img="hero-images/thoughthorse-hero.jpg"
+      data-hero-img-mobile="hero-images/thoughthorse-hero-mobile.jpg"
       data-title="Thoughthorse"
       data-tag="Web Design"
       data-desc="Web production design at Thoughthorse. Designed and built web pages and interactive components, translating creative direction into clean, functional front-end code. 2014."
@@ -1237,49 +1247,29 @@
     /* =============================================
        FEATURED HERO
     ============================================= */
-    const heroProjects = [
-      {
-        title:    'LegalZoom',
-        category: 'Email Campaign',
-        desc:     'A full suite of marketing emails — promotions, onboarding, and transactional design built for one of the web\'s biggest legal brands.',
-        img:      'https://www.space3001.com/popups/images/LZ6b.jpg',
-        cardIndex: 0
-      },
-      {
-        title:    'Joe Digital',
-        category: 'Digital Advertising',
-        desc:     'Display, social, and campaign assets spanning multiple clients and platforms — built for speed, impact, and on-brand consistency.',
-        img:      'https://www.space3001.com/popups/images/JD1.jpg',
-        cardIndex: 1
-      },
-      {
-        title:    'Booz Digital',
-        category: 'Presentation Design',
-        desc:     'Polished pitch decks and visual strategy frameworks used in high-stakes client presentations and internal leadership sessions.',
-        img:      'https://www.space3001.com/popups/images/BD1a.jpg',
-        cardIndex: 2
-      },
-      {
-        title:    'The Daily',
-        category: 'Production Design',
-        desc:     'Editorial layout and UI production for Rupert Murdoch\'s iPad-native newspaper — one of the first publications built exclusively for tablet.',
-        img:      'https://www.space3001.com/popups/images/Ipad_UI_1.png',
-        cardIndex: 3
-      },
-      {
-        title:    'Thoughthorse',
-        category: 'Web Design',
-        desc:     'Front-end web production translating creative direction into clean, functional pages and interactive components.',
-        img:      'https://www.space3001.com/popups/images/webdesign1a_updated.jpg',
-        cardIndex: 4
-      }
-    ];
+    // Build hero projects from card data-attributes so hero images stay in sync with cards
+    function buildHeroProjects() {
+      return Array.from(document.querySelectorAll('.gallery-card')).map((card, i) => ({
+        title:     card.dataset.title    || '',
+        category:  card.dataset.tag      || '',
+        desc:      card.dataset.desc     || '',
+        // dedicated hero images (desktop + mobile); fallback to first portfolio image
+        heroImg:       card.dataset.heroImg       || card.dataset.img || '',
+        heroImgMobile: card.dataset.heroImgMobile || card.dataset.heroImg || card.dataset.img || '',
+        cardIndex: i
+      }));
+    }
+
+    const heroProjects = buildHeroProjects();
 
     let heroIndex = Math.floor(Math.random() * heroProjects.length);
 
     function renderHero(idx) {
       const p = heroProjects[idx];
-      document.getElementById('hero-bg').style.backgroundImage = `url('${p.img}')`;
+      // Use dedicated hero image: mobile (<640px) uses heroImgMobile, desktop uses heroImg
+      const isMobile = window.matchMedia('(max-width: 639px)').matches;
+      const heroSrc  = isMobile ? p.heroImgMobile : p.heroImg;
+      document.getElementById('hero-bg').style.backgroundImage = heroSrc ? `url('${heroSrc}')` : '';
       document.getElementById('hero-category').textContent = p.category;
       document.getElementById('hero-title').textContent    = p.title;
       document.getElementById('hero-desc').textContent     = p.desc;
@@ -1305,6 +1295,9 @@
       const allCards = Array.from(document.querySelectorAll('.gallery-card'));
       openLightbox(heroProjects[heroIndex].cardIndex, 0);
     }
+
+    // Swap hero image on viewport resize (desktop ↔ mobile)
+    window.matchMedia('(max-width: 639px)').addEventListener('change', () => renderHero(heroIndex));
 
     // Kick off
     renderHero(heroIndex);
